@@ -17,7 +17,7 @@ Starcraft 2:
   non_local_items: []
     # Forces these items to be outside their native world.
 
-  start_inventory: []
+  start_inventory: {}
     # Start with these items.
 
   start_hints: []
