@@ -1,0 +1,804 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "title": "Archipelago sc2 yaml settings (0.4.5)",
+    "description": "The yaml settings for generating a Starcraft 2 world in Archipelago",
+    "type": "object",
+    "properties": {
+        "name": {
+            "description": "The player name for this slot.",
+            "type": "string"
+        },
+        "game": {
+            "description": "The game being played.",
+            "type": "string",
+            "oneOf": [
+                {"const": "Starcraft 2"}
+            ]
+        },
+        "description": {
+            "description": "A quick description of this yaml.",
+            "type": "string"
+        },
+        "Starcraft 2": {
+            "description": "The Starcraft 2-specific game settings.",
+            "type": "object",
+            "properties": {
+                "progression_balancing": {
+                    "description": "This option doesn't do much for Starcraft 2; it is recommended to disable it.\nFor other games, this would get the generator to try shifting progression items earlier in the world.",
+                    "oneOf": [
+                        {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 99
+                        },
+                        {
+                            "type": "string",
+                            "oneOf": [{"const": "disabled"}]
+                        }
+                    ]
+                },
+                "accessibility": {
+                    "description": "Controls what portion of your world is guaranteed accessibly by logic.",
+                    "oneOf": [
+                        {"const": "locations"},
+                        {"const": "items"},
+                        {"const": "minimal"}
+                    ]
+                },
+                "local_items": {
+                    "description": "Forces these items to be in their native world.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "start_inventory": {
+                    "description": "Start with these items.",
+                    "type": "object",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "start_hints": {
+                    "description": "Start with these item's locations prefilled into the !hint command.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "start_location_hints": {
+                    "description": "Start with these locations and their item prefilled into the !hint command.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "exclude_locations": {
+                    "description": "Prevent these locations from having an important item.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "priority_locations": {
+                    "description": "Prevent these locations from having an unimportant item.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "item_links": {
+                    "description": "Share part of your item pool with other players..",
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                },
+                "game_difficulty": {
+                    "description": "The difficulty of the campaign, affects enemy AI, starting units, and game speed.\n\nFor those unfamiliar with the Archipelago randomizer, the recommended settings are one difficulty level\nlower than the vanilla game",
+                    "oneOf": [
+                        {"const": "casual"},
+                        {"const": "normal"},
+                        {"const": "hard"},
+                        {"const": "brutal"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "casual": {"type": "integer", "minimum": 0},
+                                "normal": {"type": "integer", "minimum": 0},
+                                "hard": {"type": "integer", "minimum": 0},
+                                "brutal": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "game_speed": {
+                    "description": "Optional setting to override difficulty-based game speed.",
+                    "oneOf": [
+                        {"const": "default"},
+                        {"const": "slower"},
+                        {"const": "slow"},
+                        {"const": "normal"},
+                        {"const": "fast"},
+                        {"const": "faster"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "default": {"type": "integer", "minimum": 0},
+                                "slower": {"type": "integer", "minimum": 0},
+                                "slow": {"type": "integer", "minimum": 0},
+                                "normal": {"type": "integer", "minimum": 0},
+                                "fast": {"type": "integer", "minimum": 0},
+                                "faster": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "disable_forced_camera": {
+                    "description": "Prevents the game from moving or locking the camera without the player's consent.",
+                    "type": "boolean"
+                },
+                "skip_cutscenes": {
+                    "description": "Skips all cutscenes and prevents dialog from blocking progress.",
+                    "type": "boolean"
+                },
+                "all_in_map": {
+                    "description": "Determines what version of All-In (WoL final map) that will be generated for the campaign.",
+                    "oneOf": [
+                        {"const": "ground"},
+                        {"const": "air"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "ground": {"type": "integer", "minimum": 0},
+                                "air": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "mission_order": {
+                    "description": "Determines the order the missions are played in.  The last three mission orders end in a random mission.\nVanilla (83 total if all campaigns enabled): Keeps the standard mission order and branching from the vanilla Campaigns.\nVanilla Shuffled (83 total if all campaigns enabled): Keeps same branching paths from the vanilla Campaigns but randomizes the order of missions within.\nMini Campaign (47 total if all campaigns enabled): Shorter version of the campaign with randomized missions and optional branches.\nMedium Grid (16):  A 4x4 grid of random missions.  Start at the top-left and forge a path towards bottom-right mission to win.\nMini Grid (9):  A 3x3 version of Grid.  Complete the bottom-right mission to win.\nBlitz (12):  12 random missions that open up very quickly.  Complete the bottom-right mission to win.\nGauntlet (7): Linear series of 7 random missions to complete the campaign.\nMini Gauntlet (4): Linear series of 4 random missions to complete the campaign.\nTiny Grid (4): A 2x2 version of Grid.  Complete the bottom-right mission to win.\nGrid (variable): A grid that will resize to use all non-excluded missions.  Corners may be omitted to make the grid more square.  Complete the bottom-right mission to win.",
+                    "oneOf": [
+                        {"const": "vanilla"},
+                        {"const": "vanilla_shuffled"},
+                        {"const": "mini_campaign"},
+                        {"const": "medium_grid"},
+                        {"const": "mini_grid"},
+                        {"const": "blitz"},
+                        {"const": "gauntlet"},
+                        {"const": "mini_gauntlet"},
+                        {"const": "tiny_grid"},
+                        {"const": "grid"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "vanilla": {"type": "integer", "minimum": 0},
+                                "vanilla_shuffled": {"type": "integer", "minimum": 0},
+                                "mini_campaign": {"type": "integer", "minimum": 0},
+                                "medium_grid": {"type": "integer", "minimum": 0},
+                                "mini_grid": {"type": "integer", "minimum": 0},
+                                "blitz": {"type": "integer", "minimum": 0},
+                                "gauntlet": {"type": "integer", "minimum": 0},
+                                "mini_gauntlet": {"type": "integer", "minimum": 0},
+                                "tiny_grid": {"type": "integer", "minimum": 0},
+                                "grid": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "maximum_campaign_size": {
+                    "description": "Sets an upper bound on how many missions to include when a variable-size mission order is selected.\nIf a set-size mission order is selected, does nothing.",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 83
+                },
+                "grid_two_start_positions": {
+                    "description": "If turned on and 'grid' mission order is selected, removes a mission from the starting\ncorner sets the adjacent two missions as the starter missions.",
+                    "type": "boolean"
+                },
+                "player_color_terran_raynor": {
+                    "description": "Determines in-game team color for playable Raynor's Raiders (Terran) factions.",
+                    "oneOf": [
+                        {"const": "white"},
+                        {"const": "red"},
+                        {"const": "blue"},
+                        {"const": "teal"},
+                        {"const": "purple"},
+                        {"const": "yellow"},
+                        {"const": "orange"},
+                        {"const": "green"},
+                        {"const": "light_pink"},
+                        {"const": "violet"},
+                        {"const": "light_grey"},
+                        {"const": "dark_green"},
+                        {"const": "brown"},
+                        {"const": "light_green"},
+                        {"const": "dark_grey"},
+                        {"const": "pink"},
+                        {"const": "rainbow"},
+                        {"const": "default"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "white": {"type": "integer", "minimum": 0},
+                                "red": {"type": "integer", "minimum": 0},
+                                "blue": {"type": "integer", "minimum": 0},
+                                "teal": {"type": "integer", "minimum": 0},
+                                "purple": {"type": "integer", "minimum": 0},
+                                "yellow": {"type": "integer", "minimum": 0},
+                                "orange": {"type": "integer", "minimum": 0},
+                                "green": {"type": "integer", "minimum": 0},
+                                "light_pink": {"type": "integer", "minimum": 0},
+                                "violet": {"type": "integer", "minimum": 0},
+                                "light_grey": {"type": "integer", "minimum": 0},
+                                "dark_green": {"type": "integer", "minimum": 0},
+                                "brown": {"type": "integer", "minimum": 0},
+                                "light_green": {"type": "integer", "minimum": 0},
+                                "dark_grey": {"type": "integer", "minimum": 0},
+                                "pink": {"type": "integer", "minimum": 0},
+                                "rainbow": {"type": "integer", "minimum": 0},
+                                "default": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "player_color_protoss": {
+                    "description": "Determines in-game team color for playable Protoss factions.",
+                    "oneOf": [
+                        {"const": "white"},
+                        {"const": "red"},
+                        {"const": "blue"},
+                        {"const": "teal"},
+                        {"const": "purple"},
+                        {"const": "yellow"},
+                        {"const": "orange"},
+                        {"const": "green"},
+                        {"const": "light_pink"},
+                        {"const": "violet"},
+                        {"const": "light_grey"},
+                        {"const": "dark_green"},
+                        {"const": "brown"},
+                        {"const": "light_green"},
+                        {"const": "dark_grey"},
+                        {"const": "pink"},
+                        {"const": "rainbow"},
+                        {"const": "default"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "white": {"type": "integer", "minimum": 0},
+                                "red": {"type": "integer", "minimum": 0},
+                                "blue": {"type": "integer", "minimum": 0},
+                                "teal": {"type": "integer", "minimum": 0},
+                                "purple": {"type": "integer", "minimum": 0},
+                                "yellow": {"type": "integer", "minimum": 0},
+                                "orange": {"type": "integer", "minimum": 0},
+                                "green": {"type": "integer", "minimum": 0},
+                                "light_pink": {"type": "integer", "minimum": 0},
+                                "violet": {"type": "integer", "minimum": 0},
+                                "light_grey": {"type": "integer", "minimum": 0},
+                                "dark_green": {"type": "integer", "minimum": 0},
+                                "brown": {"type": "integer", "minimum": 0},
+                                "light_green": {"type": "integer", "minimum": 0},
+                                "dark_grey": {"type": "integer", "minimum": 0},
+                                "pink": {"type": "integer", "minimum": 0},
+                                "rainbow": {"type": "integer", "minimum": 0},
+                                "default": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "player_color_zerg": {
+                    "description": "Determines in-game team color for playable Zerg factions before Kerrigan becomes Primal Kerrigan.",
+                    "oneOf": [
+                        {"const": "white"},
+                        {"const": "red"},
+                        {"const": "blue"},
+                        {"const": "teal"},
+                        {"const": "purple"},
+                        {"const": "yellow"},
+                        {"const": "orange"},
+                        {"const": "green"},
+                        {"const": "light_pink"},
+                        {"const": "violet"},
+                        {"const": "light_grey"},
+                        {"const": "dark_green"},
+                        {"const": "brown"},
+                        {"const": "light_green"},
+                        {"const": "dark_grey"},
+                        {"const": "pink"},
+                        {"const": "rainbow"},
+                        {"const": "default"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "white": {"type": "integer", "minimum": 0},
+                                "red": {"type": "integer", "minimum": 0},
+                                "blue": {"type": "integer", "minimum": 0},
+                                "teal": {"type": "integer", "minimum": 0},
+                                "purple": {"type": "integer", "minimum": 0},
+                                "yellow": {"type": "integer", "minimum": 0},
+                                "orange": {"type": "integer", "minimum": 0},
+                                "green": {"type": "integer", "minimum": 0},
+                                "light_pink": {"type": "integer", "minimum": 0},
+                                "violet": {"type": "integer", "minimum": 0},
+                                "light_grey": {"type": "integer", "minimum": 0},
+                                "dark_green": {"type": "integer", "minimum": 0},
+                                "brown": {"type": "integer", "minimum": 0},
+                                "light_green": {"type": "integer", "minimum": 0},
+                                "dark_grey": {"type": "integer", "minimum": 0},
+                                "pink": {"type": "integer", "minimum": 0},
+                                "rainbow": {"type": "integer", "minimum": 0},
+                                "default": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "player_color_zerg_primal": {
+                    "description": "Determines in-game team color for playable Zerg factions after Kerrigan becomes Primal Kerrigan.",
+                    "oneOf": [
+                        {"const": "white"},
+                        {"const": "red"},
+                        {"const": "blue"},
+                        {"const": "teal"},
+                        {"const": "purple"},
+                        {"const": "yellow"},
+                        {"const": "orange"},
+                        {"const": "green"},
+                        {"const": "light_pink"},
+                        {"const": "violet"},
+                        {"const": "light_grey"},
+                        {"const": "dark_green"},
+                        {"const": "brown"},
+                        {"const": "light_green"},
+                        {"const": "dark_grey"},
+                        {"const": "pink"},
+                        {"const": "rainbow"},
+                        {"const": "default"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "white": {"type": "integer", "minimum": 0},
+                                "red": {"type": "integer", "minimum": 0},
+                                "blue": {"type": "integer", "minimum": 0},
+                                "teal": {"type": "integer", "minimum": 0},
+                                "purple": {"type": "integer", "minimum": 0},
+                                "yellow": {"type": "integer", "minimum": 0},
+                                "orange": {"type": "integer", "minimum": 0},
+                                "green": {"type": "integer", "minimum": 0},
+                                "light_pink": {"type": "integer", "minimum": 0},
+                                "violet": {"type": "integer", "minimum": 0},
+                                "light_grey": {"type": "integer", "minimum": 0},
+                                "dark_green": {"type": "integer", "minimum": 0},
+                                "brown": {"type": "integer", "minimum": 0},
+                                "light_green": {"type": "integer", "minimum": 0},
+                                "dark_grey": {"type": "integer", "minimum": 0},
+                                "pink": {"type": "integer", "minimum": 0},
+                                "rainbow": {"type": "integer", "minimum": 0},
+                                "default": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "enable_wol_missions": {
+                    "description": "Enables missions from main Wings of Liberty campaign.",
+                    "type": "boolean"
+                },
+                "enable_prophecy_missions": {
+                    "description": "Enables missions from Prophecy mini-campaign.",
+                    "type": "boolean"
+                },
+                "enable_hots_missions": {
+                    "description": "Enables missions from Heart of the Swarm campaign.",
+                    "type": "boolean"
+                },
+                "enable_lotv_prologue_missions": {
+                    "description": "Enables missions from Prologue campaign.",
+                    "type": "boolean"
+                },
+                "enable_lotv_missions": {
+                    "description": "Enables missions from Legacy of the Void campaign.",
+                    "type": "boolean"
+                },
+                "enable_epilogue_missions": {
+                    "description": "Enables missions from Epilogue campaign.\nThese missions are considered very hard.\n\nEnabling Wings of Liberty, Heart of the Swarm and Legacy of the Void is strongly recommended in order to play Epilogue.\nNot recommended for short mission orders.\nSee also: Exclude Very Hard Missions",
+                    "type": "boolean"
+                },
+                "enable_nco_missions": {
+                    "description": "Enables missions from Nova Covert Ops campaign.\n\nNote: For best gameplay experience it's recommended to also enable Wings of Liberty campaign.",
+                    "type": "boolean"
+                },
+                "shuffle_campaigns": {
+                    "description": "Shuffles the missions between campaigns if enabled.\nOnly available for Vanilla Shuffled and Mini Campaign mission order",
+                    "type": "boolean"
+                },
+                "shuffle_no_build": {
+                    "description": "Determines if the no-build missions are included in the shuffle.\nIf turned off, the no-build missions will not appear. Has no effect for Vanilla mission order.",
+                    "type": "boolean"
+                },
+                "starter_unit": {
+                    "description": "Unlocks a random unit at the start of the game.\n\nOff: No units are provided, the first unit must be obtained from the randomizer\nBalanced: A unit that doesn't give the player too much power early on is given\nAny Starter Unit: Any starter unit can be given",
+                    "oneOf": [
+                        {"const": "off"},
+                        {"const": "balanced"},
+                        {"const": "any_starter_unit"},
+                        {"const": "false"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "off": {"type": "integer", "minimum": 0},
+                                "balanced": {"type": "integer", "minimum": 0},
+                                "any_starter_unit": {"type": "integer", "minimum": 0},
+                                "false": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "required_tactics": {
+                    "description": "Determines the maximum tactical difficulty of the world (separate from mission difficulty).  Higher settings\nincrease randomness.\n\nStandard:  All missions can be completed with good micro and macro.\nAdvanced:  Completing missions may require relying on starting units and micro-heavy units.\nNo Logic:  Units and upgrades may be placed anywhere.  LIKELY TO RENDER THE RUN IMPOSSIBLE ON HARDER DIFFICULTIES!\n           Locks Grant Story Tech option to true.",
+                    "oneOf": [
+                        {"const": "standard"},
+                        {"const": "advanced"},
+                        {"const": "no_logic"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "standard": {"type": "integer", "minimum": 0},
+                                "advanced": {"type": "integer", "minimum": 0},
+                                "no_logic": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "ensure_generic_items": {
+                    "description": "Specifies a minimum percentage of the generic item pool that will be present for the slot.\nThe generic item pool is the pool of all generically useful items after all exclusions.\nGenerically-useful items include: Worker upgrades, Building upgrades, economy upgrades,\nMercenaries, Kerrigan levels and abilities, and Spear of Adun abilities\nIncreasing this percentage will make units less common.",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100
+                },
+                "min_number_of_upgrades": {
+                    "description": "Set a minimum to the number of upgrades a unit/structure can have.\nNote that most units have 4 or 6 upgrades.\nIf a unit has fewer upgrades than the minimum, it will have all of its upgrades.\n\nDoesn't affect shared unit upgrades.",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                },
+                "max_number_of_upgrades": {
+                    "description": "Set a maximum to the number of upgrades a unit/structure can have. -1 is used to define unlimited.\nNote that most unit have 4 to 6 upgrades.\n\nDoesn't affect shared unit upgrades.",
+                    "type": "integer",
+                    "minimum": -1,
+                    "maximum": 12
+                },
+                "generic_upgrade_missions": {
+                    "description": "Determines the percentage of missions in the mission order that must be completed before\nlevel 1 of all weapon and armor upgrades is unlocked.  Level 2 upgrades require double the amount of missions,\nand level 3 requires triple the amount.  The required amounts are always rounded down.\nIf set to 0, upgrades are instead added to the item pool and must be found to be used.",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100
+                },
+                "generic_upgrade_research": {
+                    "description": "Determines how weapon and armor upgrades affect missions once unlocked.\n\nVanilla:  Upgrades must be researched as normal.\nAuto In No-Build:  In No-Build missions, upgrades are automatically researched.\nIn all other missions, upgrades must be researched as normal.\nAuto In Build:  In No-Build missions, upgrades are unavailable as normal.\nIn all other missions, upgrades are automatically researched.\nAlways Auto:  Upgrades are automatically researched in all missions.",
+                    "oneOf": [
+                        {"const": "vanilla"},
+                        {"const": "auto_in_no_build"},
+                        {"const": "auto_in_build"},
+                        {"const": "always_auto"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "vanilla": {"type": "integer", "minimum": 0},
+                                "auto_in_no_build": {"type": "integer", "minimum": 0},
+                                "auto_in_build": {"type": "integer", "minimum": 0},
+                                "always_auto": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "generic_upgrade_items": {
+                    "description": "Determines how weapon and armor upgrades are split into items.  All options produce 3 levels of each item.\nDoes nothing if upgrades are unlocked by completed mission counts.\n\nIndividual Items:  All weapon and armor upgrades are each an item,\nresulting in 18 total upgrade items for Terran and 15 total items for Zerg and Protoss each.\nBundle Weapon And Armor:  All types of weapon upgrades are one item per race,\nand all types of armor upgrades are one item per race,\nresulting in 18 total items.\nBundle Unit Class:  Weapon and armor upgrades are merged,\nbut upgrades are bundled separately for each race:\nInfantry, Vehicle, and Starship upgrades for Terran (9 items),\nGround and Flyer upgrades for Zerg (6 items),\nGround and Air upgrades for Protoss (6 items),\nresulting in 21 total items.\nBundle All:  All weapon and armor upgrades are one item per race,\nresulting in 9 total items.",
+                    "oneOf": [
+                        {"const": "individual_items"},
+                        {"const": "bundle_weapon_and_armor"},
+                        {"const": "bundle_unit_class"},
+                        {"const": "bundle_all"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "individual_items": {"type": "integer", "minimum": 0},
+                                "bundle_weapon_and_armor": {"type": "integer", "minimum": 0},
+                                "bundle_unit_class": {"type": "integer", "minimum": 0},
+                                "bundle_all": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "kerrigan_presence": {
+                    "description": "Determines whether Kerrigan is playable outside of missions that require her.\n\nVanilla: Kerrigan is playable as normal, appears in the same missions as in vanilla game.\nNot Present:  Kerrigan is not playable, unless the mission requires her to be present.  Other hero units stay playable,\n    and locations normally requiring Kerrigan can be checked by any unit.\n    Kerrigan level items, active abilities and passive abilities affecting her will not appear.\n    In missions where the Kerrigan unit is required, story abilities are given in same way as Grant Story Tech is set to true\nNot Present And No Passives:  In addition to the above, Kerrigan's passive abilities affecting other units (such as Twin Drones) will not appear.\n\nNote: Always set to \"Not Present\" if Heart of the Swarm campaign is disabled.",
+                    "oneOf": [
+                        {"const": "vanilla"},
+                        {"const": "not_present"},
+                        {"const": "not_present_and_no_passives"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "vanilla": {"type": "integer", "minimum": 0},
+                                "not_present": {"type": "integer", "minimum": 0},
+                                "not_present_and_no_passives": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "kerrigan_levels_per_mission_completed": {
+                    "description": "Determines how many levels Kerrigan gains when a mission is beaten.\n\nNOTE: Setting this too low can result in generation failures if The Infinite Cycle or Supreme are in the mission pool.",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 20
+                },
+                "kerrigan_levels_per_mission_completed_cap": {
+                    "description": "Limits how many total levels Kerrigan can gain from beating missions.  This does not affect levels gained from items.  \nSet to -1 to disable this limit.\n\nNOTE: The following missions have these level requirements:\nSupreme: 35\nThe Infinite Cycle: 70\nSee Grant Story Levels for more details.",
+                    "type": "integer",
+                    "minimum": -1,
+                    "maximum": 140
+                },
+                "kerrigan_level_item_sum": {
+                    "description": "Determines the sum of the level items in the world.  This does not affect levels gained from beating missions.\n\nNOTE: The following missions have these level requirements:\nSupreme: 35\nThe Infinite Cycle: 70\nSee Grant Story Levels for more details.",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 140
+                },
+                "kerrigan_level_item_distribution": {
+                    "description": "Determines the amount and size of Kerrigan level items.\n\nVanilla:  Uses the distribution in the vanilla campaign.\nThis entails 32 individual levels and 6 packs of varying sizes.\nThis distribution always adds up to 70, ignoring the Level Item Sum setting.\nSmooth:  Uses a custom, condensed distribution of 10 items between sizes 4 and 10,\nintended to fit more levels into settings with little room for filler while keeping some variance in level gains.\nThis distribution always adds up to 70, ignoring the Level Item Sum setting.\nSize 70:  Uses items worth 70 levels each.\nSize 35:  Uses items worth 35 levels each.\nSize 14:  Uses items worth 14 levels each.\nSize 10:  Uses items worth 10 levels each.\nSize 7:  Uses items worth 7 levels each.\nSize 5:  Uses items worth 5 levels each.\nSize 2:  Uses items worth 2 level eachs.\nSize 1:  Uses individual levels.  As there are not enough locations in the game for this distribution,\nthis will result in a greatly reduced total level, and is likely to remove many other items.",
+                    "oneOf": [
+                        {"const": "vanilla"},
+                        {"const": "smooth"},
+                        {"const": "size_70"},
+                        {"const": "size_35"},
+                        {"const": "size_14"},
+                        {"const": "size_10"},
+                        {"const": "size_7"},
+                        {"const": "size_5"},
+                        {"const": "size_2"},
+                        {"const": "size_1"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "vanilla": {"type": "integer", "minimum": 0},
+                                "smooth": {"type": "integer", "minimum": 0},
+                                "size_70": {"type": "integer", "minimum": 0},
+                                "size_35": {"type": "integer", "minimum": 0},
+                                "size_14": {"type": "integer", "minimum": 0},
+                                "size_10": {"type": "integer", "minimum": 0},
+                                "size_7": {"type": "integer", "minimum": 0},
+                                "size_5": {"type": "integer", "minimum": 0},
+                                "size_2": {"type": "integer", "minimum": 0},
+                                "size_1": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "kerrigan_total_level_cap": {
+                    "description": "Limits how many total levels Kerrigan can gain from any source.\nDepending on your other settings, there may be more levels available in the world,\nbut they will not affect Kerrigan.\nSet to -1 to disable this limit.\n\nNOTE: The following missions have these level requirements:\nSupreme: 35\nThe Infinite Cycle: 70\nSee Grant Story Levels for more details.",
+                    "type": "integer",
+                    "minimum": -1,
+                    "maximum": 140
+                },
+                "start_primary_abilities": {
+                    "description": "Number of Primary Abilities (Kerrigan Tier 1, 2, and 4) to start the game with.\nIf set to 4, a Tier 7 ability is also included.",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 4
+                },
+                "kerrigan_primal_status": {
+                    "description": "Determines when Kerrigan appears in her Primal Zerg form.\nThis greatly increases her energy regeneration.\n\nVanilla:  Kerrigan is human in missions that canonically appear before The Crucible,\nand zerg thereafter.\nAlways Zerg:  Kerrigan is always zerg.\nAlways Human:  Kerrigan is always human.\nLevel 35:  Kerrigan is human until reaching level 35, and zerg thereafter.\nHalf Completion:  Kerrigan is human until half of the missions in the world are completed,\nand zerg thereafter.\nItem:  Kerrigan's Primal Form is an item. She is human until it is found, and zerg thereafter.",
+                    "oneOf": [
+                        {"const": "vanilla"},
+                        {"const": "always_zerg"},
+                        {"const": "always_human"},
+                        {"const": "level_35"},
+                        {"const": "half_completion"},
+                        {"const": "item"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "vanilla": {"type": "integer", "minimum": 0},
+                                "always_zerg": {"type": "integer", "minimum": 0},
+                                "always_human": {"type": "integer", "minimum": 0},
+                                "level_35": {"type": "integer", "minimum": 0},
+                                "half_completion": {"type": "integer", "minimum": 0},
+                                "item": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "spear_of_adun_presence": {
+                    "description": "Determines in which missions Spear of Adun calldowns will be available.\nAffects only abilities used from Spear of Adun top menu.\n\nNot Present: Spear of Adun calldowns are unavailable.\nLotV Protoss: Spear of Adun calldowns are only available in LotV main campaign\nProtoss: Spear od Adun calldowns are available in any Protoss mission\nEverywhere: Spear od Adun calldowns are available in any mission of any race",
+                    "oneOf": [
+                        {"const": "not_present"},
+                        {"const": "lotv_protoss"},
+                        {"const": "protoss"},
+                        {"const": "everywhere"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "not_present": {"type": "integer", "minimum": 0},
+                                "lotv_protoss": {"type": "integer", "minimum": 0},
+                                "protoss": {"type": "integer", "minimum": 0},
+                                "everywhere": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "spear_of_adun_present_in_no_build": {
+                    "description": "Determines if Spear of Adun calldowns are available in no-build missions.\n\nIf turned on, Spear of Adun calldown powers are available in missions specified under \"Spear of Adun Presence\".\nIf turned off, Spear of Adun calldown powers are unavailable in all no-build missions",
+                    "type": "boolean"
+                },
+                "spear_of_adun_autonomously_cast_ability_presence": {
+                    "description": "Determines availability of Spear of Adun powers, that are autonomously cast.\nAffects abilities like Reconstruction Beam or Overwatch\n\nNot Presents: Autocasts are not available.\nLotV Protoss: Spear of Adun autocasts are only available in LotV main campaign\nProtoss: Spear od Adun autocasts are available in any Protoss mission\nEverywhere: Spear od Adun autocasts are available in any mission of any race",
+                    "oneOf": [
+                        {"const": "not_present"},
+                        {"const": "lotv_protoss"},
+                        {"const": "protoss"},
+                        {"const": "everywhere"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "not_present": {"type": "integer", "minimum": 0},
+                                "lotv_protoss": {"type": "integer", "minimum": 0},
+                                "protoss": {"type": "integer", "minimum": 0},
+                                "everywhere": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "spear_of_adun_autonomously_cast_present_in_no_build": {
+                    "description": "Determines if Spear of Adun autocasts are available in no-build missions.\n\nIf turned on, Spear of Adun autocasts are available in missions specified under \"Spear of Adun Autonomously Cast Powers Presence\".\nIf turned off, Spear of Adun autocasts are unavailable in all no-build missions",
+                    "type": "boolean"
+                },
+                "grant_story_tech": {
+                    "description": "If set true, grants special tech required for story mission completion for duration of the mission.\nOtherwise, you need to find these tech by a normal means as items.\nAffects story missions like Back in the Saddle and Supreme\n\nLocked to true if Required Tactics is set to no logic.",
+                    "type": "boolean"
+                },
+                "grant_story_levels": {
+                    "description": "If enabled, grants Kerrigan the required minimum levels for the following missions:\nSupreme: 35\nThe Infinite Cycle: 70\nThe bonus levels only apply during the listed missions, and can exceed the Total Level Cap.\n\nIf disabled, either of these missions is included, and there are not enough levels in the world, generation may fail.  \nTo prevent this, either increase the amount of levels in the world, or enable this option.\n\nIf disabled and Required Tactics is set to no logic, this option is forced to Minimum.\n\nDisabled: Kerrigan does not get bonus levels for these missions,\n          instead the levels must be gained from items or beating missions.\nAdditive: Kerrigan gains bonus levels equal to the mission's required level.\nMinimum: Kerrigan is either at her real level, or at the mission's required level,\n         depending on which is higher.",
+                    "oneOf": [
+                        {"const": "disabled"},
+                        {"const": "additive"},
+                        {"const": "minimum"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "disabled": {"type": "integer", "minimum": 0},
+                                "additive": {"type": "integer", "minimum": 0},
+                                "minimum": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "take_over_ai_allies": {
+                    "description": "On maps supporting this feature allows you to take control over an AI Ally.",
+                    "type": "boolean"
+                },
+                "locked_items": {
+                    "description": "Guarantees that these items will be unlockable",
+                    "type": "array"
+                },
+                "excluded_items": {
+                    "description": "Guarantees that these items will not be unlockable",
+                    "type": "array"
+                },
+                "excluded_missions": {
+                    "description": "Guarantees that these missions will not appear in the campaign\nDoesn't apply to vanilla mission order.\nIt may be impossible to build a valid campaign if too many missions are excluded.",
+                    "type": "array"
+                },
+                "exclude_very_hard_missions": {
+                    "description": "Excludes Very Hard missions outside of Epilogue campaign (All-In, Salvation, and all Epilogue missions are considered Very Hard).\nDoesn't apply to \"Vanilla\" mission order.\n\nDefault: Not excluded for mission orders \"Vanilla Shuffled\" or \"Grid\" with Maximum Campaign Size >= 20,\n         excluded for any other order\nYes: Non-Epilogue Very Hard missions are excluded and won't be generated\nNo: Non-Epilogue Very Hard missions can appear normally. Not recommended for too short mission orders.\n\nSee also: Excluded Missions, Enable Epilogue Missions, Maximum Campaign Size",
+                    "oneOf": [
+                        {"const": "default"},
+                        {"const": "true"},
+                        {"const": "false"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "default": {"type": "integer", "minimum": 0},
+                                "true": {"type": "integer", "minimum": 0},
+                                "false": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "nco_items": {
+                    "description": "If turned on, the equipment upgrades from Nova Covert Ops may be present in the world.\n\nIf Nova Covert Ops campaign is enabled, this option is locked to be turned on.",
+                    "type": "boolean"
+                },
+                "bw_items": {
+                    "description": "If turned on, returning items from StarCraft: Brood War may appear in the world.",
+                    "type": "boolean"
+                },
+                "ext_items": {
+                    "description": "If turned on, original items that did not appear in Campaign mode may appear in the world.",
+                    "type": "boolean"
+                },
+                "vanilla_locations": {
+                    "description": "Enables or disables item rewards for completing vanilla objectives.\nVanilla objectives are bonus objectives from the vanilla game,\nalong with some additional objectives to balance the missions.\nEnable these locations for a balanced experience.\n\nEnabled: All locations fitting into this do their normal rewards\nResources: Forces these locations to contain Starting Resources\nDisabled: Removes item rewards from these locations.\n\nNote: Individual locations subject to plando are always enabled, so the plando can be placed properly.\nSee also: Excluded Locations, Item Plando (https://archipelago.gg/tutorial/Archipelago/plando/en#item-plando)",
+                    "oneOf": [
+                        {"const": "enabled"},
+                        {"const": "resources"},
+                        {"const": "disabled"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {"type": "integer", "minimum": 0},
+                                "resources": {"type": "integer", "minimum": 0},
+                                "disabled": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "extra_locations": {
+                    "description": "Enables or disables item rewards for mission progress and minor objectives.\nThis includes mandatory mission objectives,\ncollecting reinforcements and resource pickups,\ndestroying structures, and overcoming minor challenges.\nEnables these locations to add more checks and items to your world.\n\nEnabled: All locations fitting into this do their normal rewards\nResources: Forces these locations to contain Starting Resources\nDisabled: Removes item rewards from these locations.\n\nNote: Individual locations subject to plando are always enabled, so the plando can be placed properly.\nSee also: Excluded Locations, Item Plando (https://archipelago.gg/tutorial/Archipelago/plando/en#item-plando)",
+                    "oneOf": [
+                        {"const": "enabled"},
+                        {"const": "resources"},
+                        {"const": "disabled"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {"type": "integer", "minimum": 0},
+                                "resources": {"type": "integer", "minimum": 0},
+                                "disabled": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "challenge_locations": {
+                    "description": "Enables or disables item rewards for completing challenge tasks.\nChallenges are tasks that are more difficult than completing the mission, and are often based on achievements.\nYou might be required to visit the same mission later after getting stronger in order to finish these tasks.\nEnable these locations to increase the difficulty of completing the multiworld.\n\nEnabled: All locations fitting into this do their normal rewards\nResources: Forces these locations to contain Starting Resources\nDisabled: Removes item rewards from these locations.\n\nNote: Individual locations subject to plando are always enabled, so the plando can be placed properly.\nSee also: Excluded Locations, Item Plando (https://archipelago.gg/tutorial/Archipelago/plando/en#item-plando)",
+                    "oneOf": [
+                        {"const": "enabled"},
+                        {"const": "resources"},
+                        {"const": "disabled"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {"type": "integer", "minimum": 0},
+                                "resources": {"type": "integer", "minimum": 0},
+                                "disabled": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "mastery_locations": {
+                    "description": "Enables or disables item rewards for overcoming especially difficult challenges.\nThese challenges are often based on Mastery achievements and Feats of Strength.\nEnable these locations to add the most difficult checks to the world.\n\nEnabled: All locations fitting into this do their normal rewards\nResources: Forces these locations to contain Starting Resources\nDisabled: Removes item rewards from these locations.\n\nNote: Individual locations subject to plando are always enabled, so the plando can be placed properly.\nSee also: Excluded Locations, Item Plando (https://archipelago.gg/tutorial/Archipelago/plando/en#item-plando)",
+                    "oneOf": [
+                        {"const": "enabled"},
+                        {"const": "resources"},
+                        {"const": "disabled"},
+                        {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {"type": "integer", "minimum": 0},
+                                "resources": {"type": "integer", "minimum": 0},
+                                "disabled": {"type": "integer", "minimum": 0}
+                            }
+                        }
+                    ]
+                },
+                "minerals_per_item": {
+                    "description": "Configures how many minerals are given per resource item.",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 500
+                },
+                "vespene_per_item": {
+                    "description": "Configures how much vespene gas is given per resource item.",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 500
+                },
+                "starting_supply_per_item": {
+                    "description": "Configures how much starting supply per is given per item.",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 200
+                }
+            }
+        }
+    }
+}

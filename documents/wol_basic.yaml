@@ -2,14 +2,15 @@ name: wol
 game: Starcraft 2
 description: A basic Wings of Liberty-only yaml, including all the non-vanilla terran items
 # Original author: Phanerus
+
 requires:
-  version: 0.4.4
+  version: 0.4.5
   # made for sc2-next, 2024-02-11
   # branch sc2-next
   # https://github.com/Ziktofel/Archipelago/tree/sc2-next
 
 Starcraft 2:
-  progression_balancing: disabled
+  progression_balancing: 0
   accessibility: locations
   local_items: []
     # Forces these items to be in their native world.
@@ -116,7 +117,7 @@ Starcraft 2:
     # No Logic:  Units and upgrades may be placed anywhere.  LIKELY TO RENDER THE RUN IMPOSSIBLE ON HARDER DIFFICULTIES!
     #            Locks Grant Story Tech option to true.
 
-  ensure_generic_items:
+  ensure_generic_items: 25
     # Specifies a minimum percentage of the generic item pool that will be present for the slot.
     # The generic item pool is the pool of all generically useful items after all exclusions.
     # Generically-useful items include: Worker upgrades, Building upgrades, economy upgrades,
@@ -126,12 +127,8 @@ Starcraft 2:
     # You can define additional values between the minimum and maximum values.
     # Minimum value is 0
     # Maximum value is 100
-    25: 50
-    random: 0
-    random-low: 0
-    random-high: 0
 
-  min_number_of_upgrades:
+  min_number_of_upgrades: 2
     # Set a minimum to the number of upgrades a unit/structure can have.
     # Note that most units have 4 or 6 upgrades.
     # If a unit has fewer upgrades than the minimum, it will have all of its upgrades.
@@ -141,10 +138,6 @@ Starcraft 2:
     # You can define additional values between the minimum and maximum values.
     # Minimum value is 0
     # Maximum value is 12
-    2: 50
-    random: 0
-    random-low: 0
-    random-high: 0
 
   max_number_of_upgrades: -1
     # Set a maximum to the number of upgrades a unit/structure can have. -1 is used to define unlimited.
@@ -248,7 +241,7 @@ Starcraft 2:
     # Doesn't apply to vanilla mission order.
     # It may be impossible to build a valid campaign if too many missions are excluded.
   
-  exclude_very_hard_missions: false
+  exclude_very_hard_missions: 'false'
     # Excludes Very Hard missions outside of Epilogue campaign (All-In, Salvation, and all Epilogue missions are considered Very Hard).
     # Doesn't apply to "Vanilla" mission order.
     # 
