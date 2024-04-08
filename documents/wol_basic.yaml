@@ -46,27 +46,6 @@ Starcraft 2:
     air: 50
 
   mission_order: vanilla_shuffled
-    # Determines the order the missions are played in.  The last three mission orders end in a random mission.
-    # Vanilla (29): Keeps the standard mission order and branching from the WoL Campaign.
-    # Vanilla Shuffled (29): Keeps same branching paths from the WoL Campaign but randomizes the order of missions within.
-    # Mini Campaign (15): Shorter version of the campaign with randomized missions and optional branches.
-    # Medium Grid (16):  A 4x4 grid of random missions.  Start at the top-left and forge a path towards bottom-right mission to win.
-    # Mini Grid (9):  A 3x3 version of Grid.  Complete the bottom-right mission to win.
-    # Blitz (12):  12 random missions that open up very quickly.  Complete the bottom-right mission to win.
-    # Gauntlet (7): Linear series of 7 random missions to complete the campaign.
-    # Mini Gauntlet (4): Linear series of 4 random missions to complete the campaign.
-    # Tiny Grid (4): A 2x2 version of Grid.  Complete the bottom-right mission to win.
-    # Grid (variable): A grid that will resize to use all non-excluded missions.  Corners may be omitted to make the grid more square.  Complete the bottom-right mission to win.
-    # vanilla: 50
-    # vanilla_shuffled: 0
-    # mini_campaign: 0
-    # medium_grid: 0
-    # mini_grid: 0
-    # blitz: 0
-    # gauntlet: 0
-    # mini_gauntlet: 0
-    # tiny_grid: 0
-    # grid: 0
 
   maximum_campaign_size: 83
     # Sets an upper bound on how many missions to include when a variable-size mission order is selected.
@@ -241,7 +220,7 @@ Starcraft 2:
     # Doesn't apply to vanilla mission order.
     # It may be impossible to build a valid campaign if too many missions are excluded.
   
-  exclude_very_hard_missions: 'false'
+  exclude_very_hard_missions: false
     # Excludes Very Hard missions outside of Epilogue campaign (All-In, Salvation, and all Epilogue missions are considered Very Hard).
     # Doesn't apply to "Vanilla" mission order.
     # 

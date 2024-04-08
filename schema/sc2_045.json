@@ -1329,6 +1329,7 @@
                         {"const": "default"},
                         {"const": "true"},
                         {"const": "false"},
+                        {"type": "boolean"},
                         {
                             "type": "object",
                             "properties": {
