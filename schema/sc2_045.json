@@ -4,6 +4,12 @@
     "description": "The yaml settings for generating a Starcraft 2 world in Archipelago",
     "type": "object",
     "$defs": {
+        "yaml_bool": {
+            "anyOf": [
+                {"type": "boolean"},
+                {"enum": ["true", "false"]}
+            ]
+        },
         "sc2_item": {
             "enum": [
                 "Marine",
@@ -769,11 +775,11 @@
                 },
                 "disable_forced_camera": {
                     "description": "Prevents the game from moving or locking the camera without the player's consent.",
-                    "type": "boolean"
+                    "$ref": "#/$defs/yaml_bool"
                 },
                 "skip_cutscenes": {
                     "description": "Skips all cutscenes and prevents dialog from blocking progress.",
-                    "type": "boolean"
+                    "$ref": "#/$defs/yaml_bool"
                 },
                 "all_in_map": {
                     "description": "Determines what version of All-In (WoL final map) that will be generated for the campaign.",
@@ -827,7 +833,7 @@
                 },
                 "grid_two_start_positions": {
                     "description": "If turned on and 'grid' mission order is selected, removes a mission from the starting\ncorner sets the adjacent two missions as the starter missions.",
-                    "type": "boolean"
+                    "$ref": "#/$defs/yaml_bool"
                 },
                 "player_color_terran_raynor": {
                     "description": "Determines in-game team color for playable Raynor's Raiders (Terran) factions.",
@@ -1015,39 +1021,39 @@
                 },
                 "enable_wol_missions": {
                     "description": "Enables missions from main Wings of Liberty campaign.",
-                    "type": "boolean"
+                    "$ref": "#/$defs/yaml_bool"
                 },
                 "enable_prophecy_missions": {
                     "description": "Enables missions from Prophecy mini-campaign.",
-                    "type": "boolean"
+                    "$ref": "#/$defs/yaml_bool"
                 },
                 "enable_hots_missions": {
                     "description": "Enables missions from Heart of the Swarm campaign.",
-                    "type": "boolean"
+                    "$ref": "#/$defs/yaml_bool"
                 },
                 "enable_lotv_prologue_missions": {
                     "description": "Enables missions from Prologue campaign.",
-                    "type": "boolean"
+                    "$ref": "#/$defs/yaml_bool"
                 },
                 "enable_lotv_missions": {
                     "description": "Enables missions from Legacy of the Void campaign.",
-                    "type": "boolean"
+                    "$ref": "#/$defs/yaml_bool"
                 },
                 "enable_epilogue_missions": {
                     "description": "Enables missions from Epilogue campaign.\nThese missions are considered very hard.\n\nEnabling Wings of Liberty, Heart of the Swarm and Legacy of the Void is strongly recommended in order to play Epilogue.\nNot recommended for short mission orders.\nSee also: Exclude Very Hard Missions",
-                    "type": "boolean"
+                    "$ref": "#/$defs/yaml_bool"
                 },
                 "enable_nco_missions": {
                     "description": "Enables missions from Nova Covert Ops campaign.\n\nNote: For best gameplay experience it's recommended to also enable Wings of Liberty campaign.",
-                    "type": "boolean"
+                    "$ref": "#/$defs/yaml_bool"
                 },
                 "shuffle_campaigns": {
                     "description": "Shuffles the missions between campaigns if enabled.\nOnly available for Vanilla Shuffled and Mini Campaign mission order",
-                    "type": "boolean"
+                    "$ref": "#/$defs/yaml_bool"
                 },
                 "shuffle_no_build": {
                     "description": "Determines if the no-build missions are included in the shuffle.\nIf turned off, the no-build missions will not appear. Has no effect for Vanilla mission order.",
-                    "type": "boolean"
+                    "$ref": "#/$defs/yaml_bool"
                 },
                 "starter_unit": {
                     "description": "Unlocks a random unit at the start of the game.\n\nOff: No units are provided, the first unit must be obtained from the randomizer\nBalanced: A unit that doesn't give the player too much power early on is given\nAny Starter Unit: Any starter unit can be given",
@@ -1208,7 +1214,7 @@
                     ]
                 },
                 "kerrigan_total_level_cap": {
-                    "description": "Limits how many total levels Kerrigan can gain from any source.\nDepending on your other settings, there may be more levels available in the world,\nbut they will not affect Kerrigan.\nSet to -1 to disable this limit.\n\nNOTE: The following missions have these level requirements:\nSupreme: 35\nThe Infinite Cycle: 70\nSee Grant Story Levels for more details.",
+                    "description": "Limits how many total levels Kerrigan can gain from any source.  Depending on your other settings,\nthere may be more levels available in the world, but they will not affect Kerrigan.  \nSet to -1 to disable this limit.\n\nNOTE: The following missions have these level requirements:\nSupreme: 35\nThe Infinite Cycle: 70\nSee Grant Story Levels for more details.",
                     "type": "integer",
                     "minimum": -1,
                     "maximum": 140
@@ -1261,7 +1267,7 @@
                 },
                 "spear_of_adun_present_in_no_build": {
                     "description": "Determines if Spear of Adun calldowns are available in no-build missions.\n\nIf turned on, Spear of Adun calldown powers are available in missions specified under \"Spear of Adun Presence\".\nIf turned off, Spear of Adun calldown powers are unavailable in all no-build missions",
-                    "type": "boolean"
+                    "$ref": "#/$defs/yaml_bool"
                 },
                 "spear_of_adun_autonomously_cast_ability_presence": {
                     "description": "Determines availability of Spear of Adun powers, that are autonomously cast.\nAffects abilities like Reconstruction Beam or Overwatch\n\nNot Presents: Autocasts are not available.\nLotV Protoss: Spear of Adun autocasts are only available in LotV main campaign\nProtoss: Spear od Adun autocasts are available in any Protoss mission\nEverywhere: Spear od Adun autocasts are available in any mission of any race",
@@ -1283,11 +1289,11 @@
                 },
                 "spear_of_adun_autonomously_cast_present_in_no_build": {
                     "description": "Determines if Spear of Adun autocasts are available in no-build missions.\n\nIf turned on, Spear of Adun autocasts are available in missions specified under \"Spear of Adun Autonomously Cast Powers Presence\".\nIf turned off, Spear of Adun autocasts are unavailable in all no-build missions",
-                    "type": "boolean"
+                    "$ref": "#/$defs/yaml_bool"
                 },
                 "grant_story_tech": {
                     "description": "If set true, grants special tech required for story mission completion for duration of the mission.\nOtherwise, you need to find these tech by a normal means as items.\nAffects story missions like Back in the Saddle and Supreme\n\nLocked to true if Required Tactics is set to no logic.",
-                    "type": "boolean"
+                    "$ref": "#/$defs/yaml_bool"
                 },
                 "grant_story_levels": {
                     "description": "If enabled, grants Kerrigan the required minimum levels for the following missions:\nSupreme: 35\nThe Infinite Cycle: 70\nThe bonus levels only apply during the listed missions, and can exceed the Total Level Cap.\n\nIf disabled, either of these missions is included, and there are not enough levels in the world, generation may fail.  \nTo prevent this, either increase the amount of levels in the world, or enable this option.\n\nIf disabled and Required Tactics is set to no logic, this option is forced to Minimum.\n\nDisabled: Kerrigan does not get bonus levels for these missions,\n          instead the levels must be gained from items or beating missions.\nAdditive: Kerrigan gains bonus levels equal to the mission's required level.\nMinimum: Kerrigan is either at her real level, or at the mission's required level,\n         depending on which is higher.",
@@ -1307,7 +1313,7 @@
                 },
                 "take_over_ai_allies": {
                     "description": "On maps supporting this feature allows you to take control over an AI Ally.",
-                    "type": "boolean"
+                    "$ref": "#/$defs/yaml_bool"
                 },
                 "locked_items": {
                     "description": "Guarantees that these items will be unlockable",
@@ -1326,10 +1332,10 @@
                 "exclude_very_hard_missions": {
                     "description": "Excludes Very Hard missions outside of Epilogue campaign (All-In, Salvation, and all Epilogue missions are considered Very Hard).\nDoesn't apply to \"Vanilla\" mission order.\n\nDefault: Not excluded for mission orders \"Vanilla Shuffled\" or \"Grid\" with Maximum Campaign Size >= 20,\n         excluded for any other order\nYes: Non-Epilogue Very Hard missions are excluded and won't be generated\nNo: Non-Epilogue Very Hard missions can appear normally. Not recommended for too short mission orders.\n\nSee also: Excluded Missions, Enable Epilogue Missions, Maximum Campaign Size",
                     "oneOf": [
+                        {"type": "boolean"},
                         {"const": "default"},
                         {"const": "true"},
                         {"const": "false"},
-                        {"type": "boolean"},
                         {
                             "type": "object",
                             "properties": {
@@ -1342,15 +1348,15 @@
                 },
                 "nco_items": {
                     "description": "If turned on, the equipment upgrades from Nova Covert Ops may be present in the world.\n\nIf Nova Covert Ops campaign is enabled, this option is locked to be turned on.",
-                    "type": "boolean"
+                    "$ref": "#/$defs/yaml_bool"
                 },
                 "bw_items": {
                     "description": "If turned on, returning items from StarCraft: Brood War may appear in the world.",
-                    "type": "boolean"
+                    "$ref": "#/$defs/yaml_bool"
                 },
                 "ext_items": {
                     "description": "If turned on, original items that did not appear in Campaign mode may appear in the world.",
-                    "type": "boolean"
+                    "$ref": "#/$defs/yaml_bool"
                 },
                 "vanilla_locations": {
                     "description": "Enables or disables item rewards for completing vanilla objectives.\nVanilla objectives are bonus objectives from the vanilla game,\nalong with some additional objectives to balance the missions.\nEnable these locations for a balanced experience.\n\nEnabled: All locations fitting into this do their normal rewards\nResources: Forces these locations to contain Starting Resources\nDisabled: Removes item rewards from these locations.\n\nNote: Individual locations subject to plando are always enabled, so the plando can be placed properly.\nSee also: Excluded Locations, Item Plando (https://archipelago.gg/tutorial/Archipelago/plando/en#item-plando)",
