@@ -1424,9 +1424,11 @@
                 },
                 "maximum_campaign_size": {
                     "description": "Sets an upper bound on how many missions to include when a variable-size mission order is selected.\nIf a set-size mission order is selected, does nothing.",
-                    "type": "integer",
-                    "minimum": 1,
-                    "maximum": 83
+                    "anyOf": [
+                        {"type": "integer", "minimum": 1, "maximum": 83},
+                        {"enum": ["random", "random-low", "random-middle", "random-high"]},
+                        {"type": "string", "pattern": "^random-range(-(low|middle|high))?-\\d+-\\d+$"}
+                    ]
                 },
                 "grid_two_start_positions": {
                     "description": "If turned on and 'grid' mission order is selected, removes a mission from the starting\ncorner sets the adjacent two missions as the starter missions.",
@@ -1688,27 +1690,35 @@
                 },
                 "ensure_generic_items": {
                     "description": "Specifies a minimum percentage of the generic item pool that will be present for the slot.\nThe generic item pool is the pool of all generically useful items after all exclusions.\nGenerically-useful items include: Worker upgrades, Building upgrades, economy upgrades,\nMercenaries, Kerrigan levels and abilities, and Spear of Adun abilities\nIncreasing this percentage will make units less common.",
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 100
+                    "anyOf": [
+                        {"type": "integer", "minimum": 0, "maximum": 100},
+                        {"enum": ["random", "random-low", "random-middle", "random-high"]},
+                        {"type": "string", "pattern": "^random-range(-(low|middle|high))?-\\d+-\\d+$"}
+                    ]
                 },
                 "min_number_of_upgrades": {
                     "description": "Set a minimum to the number of upgrades a unit/structure can have.\nNote that most units have 4 or 6 upgrades.\nIf a unit has fewer upgrades than the minimum, it will have all of its upgrades.\n\nDoesn't affect shared unit upgrades.",
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 12
+                    "anyOf": [
+                        {"type": "integer", "minimum": 0, "maximum": 12},
+                        {"enum": ["random", "random-low", "random-middle", "random-high"]},
+                        {"type": "string", "pattern": "^random-range(-(low|middle|high))?-\\d+-\\d+$"}
+                    ]
                 },
                 "max_number_of_upgrades": {
                     "description": "Set a maximum to the number of upgrades a unit/structure can have. -1 is used to define unlimited.\nNote that most unit have 4 to 6 upgrades.\n\nDoesn't affect shared unit upgrades.",
-                    "type": "integer",
-                    "minimum": -1,
-                    "maximum": 12
+                    "anyOf": [
+                        {"type": "integer", "minimum": -1, "maximum": 12},
+                        {"enum": ["random", "random-low", "random-middle", "random-high"]},
+                        {"type": "string", "pattern": "^random-range(-(low|middle|high))?-\\d+-\\d+$"}
+                    ]
                 },
                 "generic_upgrade_missions": {
                     "description": "Determines the percentage of missions in the mission order that must be completed before\nlevel 1 of all weapon and armor upgrades is unlocked.  Level 2 upgrades require double the amount of missions,\nand level 3 requires triple the amount.  The required amounts are always rounded down.\nIf set to 0, upgrades are instead added to the item pool and must be found to be used.",
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 100
+                    "anyOf": [
+                        {"type": "integer", "minimum": 0, "maximum": 100},
+                        {"enum": ["random", "random-low", "random-middle", "random-high"]},
+                        {"type": "string", "pattern": "^random-range(-(low|middle|high))?-\\d+-\\d+$"}
+                    ]
                 },
                 "generic_upgrade_research": {
                     "description": "Determines how weapon and armor upgrades affect missions once unlocked.\n\nVanilla:  Upgrades must be researched as normal.\nAuto In No-Build:  In No-Build missions, upgrades are automatically researched.\nIn all other missions, upgrades must be researched as normal.\nAuto In Build:  In No-Build missions, upgrades are unavailable as normal.\nIn all other missions, upgrades are automatically researched.\nAlways Auto:  Upgrades are automatically researched in all missions.",
@@ -1764,21 +1774,27 @@
                 },
                 "kerrigan_levels_per_mission_completed": {
                     "description": "Determines how many levels Kerrigan gains when a mission is beaten.\n\nNOTE: Setting this too low can result in generation failures if The Infinite Cycle or Supreme are in the mission pool.",
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 20
+                    "anyOf": [
+                        {"type": "integer", "minimum": 0, "maximum": 20},
+                        {"enum": ["random", "random-low", "random-middle", "random-high"]},
+                        {"type": "string", "pattern": "^random-range(-(low|middle|high))?-\\d+-\\d+$"}
+                    ]
                 },
                 "kerrigan_levels_per_mission_completed_cap": {
                     "description": "Limits how many total levels Kerrigan can gain from beating missions.  This does not affect levels gained from items.  \nSet to -1 to disable this limit.\n\nNOTE: The following missions have these level requirements:\nSupreme: 35\nThe Infinite Cycle: 70\nSee Grant Story Levels for more details.",
-                    "type": "integer",
-                    "minimum": -1,
-                    "maximum": 140
+                    "anyOf": [
+                        {"type": "integer", "minimum": -1, "maximum": 140},
+                        {"enum": ["random", "random-low", "random-middle", "random-high"]},
+                        {"type": "string", "pattern": "^random-range(-(low|middle|high))?-\\d+-\\d+$"}
+                    ]
                 },
                 "kerrigan_level_item_sum": {
                     "description": "Determines the sum of the level items in the world.  This does not affect levels gained from beating missions.\n\nNOTE: The following missions have these level requirements:\nSupreme: 35\nThe Infinite Cycle: 70\nSee Grant Story Levels for more details.",
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 140
+                    "anyOf": [
+                        {"type": "integer", "minimum": 0, "maximum": 140},
+                        {"enum": ["random", "random-low", "random-middle", "random-high"]},
+                        {"type": "string", "pattern": "^random-range(-(low|middle|high))?-\\d+-\\d+$"}
+                    ]
                 },
                 "kerrigan_level_item_distribution": {
                     "description": "Determines the amount and size of Kerrigan level items.\n\nVanilla:  Uses the distribution in the vanilla campaign.\nThis entails 32 individual levels and 6 packs of varying sizes.\nThis distribution always adds up to 70, ignoring the Level Item Sum setting.\nSmooth:  Uses a custom, condensed distribution of 10 items between sizes 4 and 10,\nintended to fit more levels into settings with little room for filler while keeping some variance in level gains.\nThis distribution always adds up to 70, ignoring the Level Item Sum setting.\nSize 70:  Uses items worth 70 levels each.\nSize 35:  Uses items worth 35 levels each.\nSize 14:  Uses items worth 14 levels each.\nSize 10:  Uses items worth 10 levels each.\nSize 7:  Uses items worth 7 levels each.\nSize 5:  Uses items worth 5 levels each.\nSize 2:  Uses items worth 2 level eachs.\nSize 1:  Uses individual levels.  As there are not enough locations in the game for this distribution,\nthis will result in a greatly reduced total level, and is likely to remove many other items.",
@@ -1812,15 +1828,19 @@
                 },
                 "kerrigan_total_level_cap": {
                     "description": "Limits how many total levels Kerrigan can gain from any source.  Depending on your other settings,\nthere may be more levels available in the world, but they will not affect Kerrigan.  \nSet to -1 to disable this limit.\n\nNOTE: The following missions have these level requirements:\nSupreme: 35\nThe Infinite Cycle: 70\nSee Grant Story Levels for more details.",
-                    "type": "integer",
-                    "minimum": -1,
-                    "maximum": 140
+                    "anyOf": [
+                        {"type": "integer", "minimum": -1, "maximum": 140},
+                        {"enum": ["random", "random-low", "random-middle", "random-high"]},
+                        {"type": "string", "pattern": "^random-range(-(low|middle|high))?-\\d+-\\d+$"}
+                    ]
                 },
                 "start_primary_abilities": {
                     "description": "Number of Primary Abilities (Kerrigan Tier 1, 2, and 4) to start the game with.\nIf set to 4, a Tier 7 ability is also included.",
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 4
+                    "anyOf": [
+                        {"type": "integer", "minimum": 0, "maximum": 4},
+                        {"enum": ["random", "random-low", "random-middle", "random-high"]},
+                        {"type": "string", "pattern": "^random-range(-(low|middle|high))?-\\d+-\\d+$"}
+                    ]
                 },
                 "kerrigan_primal_status": {
                     "description": "Determines when Kerrigan appears in her Primal Zerg form.\nThis greatly increases her energy regeneration.\n\nVanilla:  Kerrigan is human in missions that canonically appear before The Crucible,\nand zerg thereafter.\nAlways Zerg:  Kerrigan is always zerg.\nAlways Human:  Kerrigan is always human.\nLevel 35:  Kerrigan is human until reaching level 35, and zerg thereafter.\nHalf Completion:  Kerrigan is human until half of the missions in the world are completed,\nand zerg thereafter.\nItem:  Kerrigan's Primal Form is an item. She is human until it is found, and zerg thereafter.",
@@ -2021,21 +2041,27 @@
                 },
                 "minerals_per_item": {
                     "description": "Configures how many minerals are given per resource item.",
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 500
+                    "anyOf": [
+                        {"type": "integer", "minimum": 0, "maximum": 500},
+                        {"enum": ["random", "random-low", "random-middle", "random-high"]},
+                        {"type": "string", "pattern": "^random-range(-(low|middle|high))?-\\d+-\\d+$"}
+                    ]
                 },
                 "vespene_per_item": {
                     "description": "Configures how much vespene gas is given per resource item.",
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 500
+                    "anyOf": [
+                        {"type": "integer", "minimum": 0, "maximum": 500},
+                        {"enum": ["random", "random-low", "random-middle", "random-high"]},
+                        {"type": "string", "pattern": "^random-range(-(low|middle|high))?-\\d+-\\d+$"}
+                    ]
                 },
                 "starting_supply_per_item": {
                     "description": "Configures how much starting supply per is given per item.",
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 200
+                    "anyOf": [
+                        {"type": "integer", "minimum": 0, "maximum": 200},
+                        {"enum": ["random", "random-low", "random-middle", "random-high"]},
+                        {"type": "string", "pattern": "^random-range(-(low|middle|high))?-\\d+-\\d+$"}
+                    ]
                 }
             }
         }
