@@ -1238,7 +1238,7 @@
         "yaml_bool": {
             "anyOf": [
                 {"type": "boolean"},
-                {"enum": ["true", "false"]}
+                {"enum": ["true", "false", "random"]}
             ]
         }
     },
@@ -1333,6 +1333,7 @@
                 "game_difficulty": {
                     "description": "The difficulty of the campaign, affects enemy AI, starting units, and game speed.\n\nFor those unfamiliar with the Archipelago randomizer, the recommended settings are one difficulty level\nlower than the vanilla game",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "casual"},
                         {"const": "normal"},
                         {"const": "hard"},
@@ -1351,6 +1352,7 @@
                 "game_speed": {
                     "description": "Optional setting to override difficulty-based game speed.",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "default"},
                         {"const": "slower"},
                         {"const": "slow"},
@@ -1381,6 +1383,7 @@
                 "all_in_map": {
                     "description": "Determines what version of All-In (WoL final map) that will be generated for the campaign.",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "ground"},
                         {"const": "air"},
                         {
@@ -1395,6 +1398,7 @@
                 "mission_order": {
                     "description": "Determines the order the missions are played in.  The last three mission orders end in a random mission.\nVanilla (83 total if all campaigns enabled): Keeps the standard mission order and branching from the vanilla Campaigns.\nVanilla Shuffled (83 total if all campaigns enabled): Keeps same branching paths from the vanilla Campaigns but randomizes the order of missions within.\nMini Campaign (47 total if all campaigns enabled): Shorter version of the campaign with randomized missions and optional branches.\nMedium Grid (16):  A 4x4 grid of random missions.  Start at the top-left and forge a path towards bottom-right mission to win.\nMini Grid (9):  A 3x3 version of Grid.  Complete the bottom-right mission to win.\nBlitz (12):  12 random missions that open up very quickly.  Complete the bottom-right mission to win.\nGauntlet (7): Linear series of 7 random missions to complete the campaign.\nMini Gauntlet (4): Linear series of 4 random missions to complete the campaign.\nTiny Grid (4): A 2x2 version of Grid.  Complete the bottom-right mission to win.\nGrid (variable): A grid that will resize to use all non-excluded missions.  Corners may be omitted to make the grid more square.  Complete the bottom-right mission to win.",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "vanilla"},
                         {"const": "vanilla_shuffled"},
                         {"const": "mini_campaign"},
@@ -1437,6 +1441,7 @@
                 "player_color_terran_raynor": {
                     "description": "Determines in-game team color for playable Raynor's Raiders (Terran) factions.",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "white"},
                         {"const": "red"},
                         {"const": "blue"},
@@ -1483,6 +1488,7 @@
                 "player_color_protoss": {
                     "description": "Determines in-game team color for playable Protoss factions.",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "white"},
                         {"const": "red"},
                         {"const": "blue"},
@@ -1529,6 +1535,7 @@
                 "player_color_zerg": {
                     "description": "Determines in-game team color for playable Zerg factions before Kerrigan becomes Primal Kerrigan.",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "white"},
                         {"const": "red"},
                         {"const": "blue"},
@@ -1575,6 +1582,7 @@
                 "player_color_zerg_primal": {
                     "description": "Determines in-game team color for playable Zerg factions after Kerrigan becomes Primal Kerrigan.",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "white"},
                         {"const": "red"},
                         {"const": "blue"},
@@ -1657,6 +1665,7 @@
                 "starter_unit": {
                     "description": "Unlocks a random unit at the start of the game.\n\nOff: No units are provided, the first unit must be obtained from the randomizer\nBalanced: A unit that doesn't give the player too much power early on is given\nAny Starter Unit: Any starter unit can be given",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "off"},
                         {"const": "balanced"},
                         {"const": "any_starter_unit"},
@@ -1675,6 +1684,7 @@
                 "required_tactics": {
                     "description": "Determines the maximum tactical difficulty of the world (separate from mission difficulty).  Higher settings\nincrease randomness.\n\nStandard:  All missions can be completed with good micro and macro.\nAdvanced:  Completing missions may require relying on starting units and micro-heavy units.\nNo Logic:  Units and upgrades may be placed anywhere.  LIKELY TO RENDER THE RUN IMPOSSIBLE ON HARDER DIFFICULTIES!\n           Locks Grant Story Tech option to true.",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "standard"},
                         {"const": "advanced"},
                         {"const": "no_logic"},
@@ -1723,6 +1733,7 @@
                 "generic_upgrade_research": {
                     "description": "Determines how weapon and armor upgrades affect missions once unlocked.\n\nVanilla:  Upgrades must be researched as normal.\nAuto In No-Build:  In No-Build missions, upgrades are automatically researched.\nIn all other missions, upgrades must be researched as normal.\nAuto In Build:  In No-Build missions, upgrades are unavailable as normal.\nIn all other missions, upgrades are automatically researched.\nAlways Auto:  Upgrades are automatically researched in all missions.",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "vanilla"},
                         {"const": "auto_in_no_build"},
                         {"const": "auto_in_build"},
@@ -1741,6 +1752,7 @@
                 "generic_upgrade_items": {
                     "description": "Determines how weapon and armor upgrades are split into items.  All options produce 3 levels of each item.\nDoes nothing if upgrades are unlocked by completed mission counts.\n\nIndividual Items:  All weapon and armor upgrades are each an item,\nresulting in 18 total upgrade items for Terran and 15 total items for Zerg and Protoss each.\nBundle Weapon And Armor:  All types of weapon upgrades are one item per race,\nand all types of armor upgrades are one item per race,\nresulting in 18 total items.\nBundle Unit Class:  Weapon and armor upgrades are merged,\nbut upgrades are bundled separately for each race:\nInfantry, Vehicle, and Starship upgrades for Terran (9 items),\nGround and Flyer upgrades for Zerg (6 items),\nGround and Air upgrades for Protoss (6 items),\nresulting in 21 total items.\nBundle All:  All weapon and armor upgrades are one item per race,\nresulting in 9 total items.",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "individual_items"},
                         {"const": "bundle_weapon_and_armor"},
                         {"const": "bundle_unit_class"},
@@ -1759,6 +1771,7 @@
                 "kerrigan_presence": {
                     "description": "Determines whether Kerrigan is playable outside of missions that require her.\n\nVanilla: Kerrigan is playable as normal, appears in the same missions as in vanilla game.\nNot Present:  Kerrigan is not playable, unless the mission requires her to be present.  Other hero units stay playable,\n    and locations normally requiring Kerrigan can be checked by any unit.\n    Kerrigan level items, active abilities and passive abilities affecting her will not appear.\n    In missions where the Kerrigan unit is required, story abilities are given in same way as Grant Story Tech is set to true\nNot Present And No Passives:  In addition to the above, Kerrigan's passive abilities affecting other units (such as Twin Drones) will not appear.\n\nNote: Always set to \"Not Present\" if Heart of the Swarm campaign is disabled.",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "vanilla"},
                         {"const": "not_present"},
                         {"const": "not_present_and_no_passives"},
@@ -1799,6 +1812,7 @@
                 "kerrigan_level_item_distribution": {
                     "description": "Determines the amount and size of Kerrigan level items.\n\nVanilla:  Uses the distribution in the vanilla campaign.\nThis entails 32 individual levels and 6 packs of varying sizes.\nThis distribution always adds up to 70, ignoring the Level Item Sum setting.\nSmooth:  Uses a custom, condensed distribution of 10 items between sizes 4 and 10,\nintended to fit more levels into settings with little room for filler while keeping some variance in level gains.\nThis distribution always adds up to 70, ignoring the Level Item Sum setting.\nSize 70:  Uses items worth 70 levels each.\nSize 35:  Uses items worth 35 levels each.\nSize 14:  Uses items worth 14 levels each.\nSize 10:  Uses items worth 10 levels each.\nSize 7:  Uses items worth 7 levels each.\nSize 5:  Uses items worth 5 levels each.\nSize 2:  Uses items worth 2 level eachs.\nSize 1:  Uses individual levels.  As there are not enough locations in the game for this distribution,\nthis will result in a greatly reduced total level, and is likely to remove many other items.",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "vanilla"},
                         {"const": "smooth"},
                         {"const": "size_70"},
@@ -1845,6 +1859,7 @@
                 "kerrigan_primal_status": {
                     "description": "Determines when Kerrigan appears in her Primal Zerg form.\nThis greatly increases her energy regeneration.\n\nVanilla:  Kerrigan is human in missions that canonically appear before The Crucible,\nand zerg thereafter.\nAlways Zerg:  Kerrigan is always zerg.\nAlways Human:  Kerrigan is always human.\nLevel 35:  Kerrigan is human until reaching level 35, and zerg thereafter.\nHalf Completion:  Kerrigan is human until half of the missions in the world are completed,\nand zerg thereafter.\nItem:  Kerrigan's Primal Form is an item. She is human until it is found, and zerg thereafter.",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "vanilla"},
                         {"const": "always_zerg"},
                         {"const": "always_human"},
@@ -1867,6 +1882,7 @@
                 "spear_of_adun_presence": {
                     "description": "Determines in which missions Spear of Adun calldowns will be available.\nAffects only abilities used from Spear of Adun top menu.\n\nNot Present: Spear of Adun calldowns are unavailable.\nLotV Protoss: Spear of Adun calldowns are only available in LotV main campaign\nProtoss: Spear od Adun calldowns are available in any Protoss mission\nEverywhere: Spear od Adun calldowns are available in any mission of any race",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "not_present"},
                         {"const": "lotv_protoss"},
                         {"const": "protoss"},
@@ -1889,6 +1905,7 @@
                 "spear_of_adun_autonomously_cast_ability_presence": {
                     "description": "Determines availability of Spear of Adun powers, that are autonomously cast.\nAffects abilities like Reconstruction Beam or Overwatch\n\nNot Presents: Autocasts are not available.\nLotV Protoss: Spear of Adun autocasts are only available in LotV main campaign\nProtoss: Spear od Adun autocasts are available in any Protoss mission\nEverywhere: Spear od Adun autocasts are available in any mission of any race",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "not_present"},
                         {"const": "lotv_protoss"},
                         {"const": "protoss"},
@@ -1915,6 +1932,7 @@
                 "grant_story_levels": {
                     "description": "If enabled, grants Kerrigan the required minimum levels for the following missions:\nSupreme: 35\nThe Infinite Cycle: 70\nThe bonus levels only apply during the listed missions, and can exceed the Total Level Cap.\n\nIf disabled, either of these missions is included, and there are not enough levels in the world, generation may fail.  \nTo prevent this, either increase the amount of levels in the world, or enable this option.\n\nIf disabled and Required Tactics is set to no logic, this option is forced to Minimum.\n\nDisabled: Kerrigan does not get bonus levels for these missions,\n          instead the levels must be gained from items or beating missions.\nAdditive: Kerrigan gains bonus levels equal to the mission's required level.\nMinimum: Kerrigan is either at her real level, or at the mission's required level,\n         depending on which is higher.",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "disabled"},
                         {"const": "additive"},
                         {"const": "minimum"},
@@ -1949,6 +1967,7 @@
                 "exclude_very_hard_missions": {
                     "description": "Excludes Very Hard missions outside of Epilogue campaign (All-In, Salvation, and all Epilogue missions are considered Very Hard).\nDoesn't apply to \"Vanilla\" mission order.\n\nDefault: Not excluded for mission orders \"Vanilla Shuffled\" or \"Grid\" with Maximum Campaign Size >= 20,\n         excluded for any other order\nYes: Non-Epilogue Very Hard missions are excluded and won't be generated\nNo: Non-Epilogue Very Hard missions can appear normally. Not recommended for too short mission orders.\n\nSee also: Excluded Missions, Enable Epilogue Missions, Maximum Campaign Size",
                     "oneOf": [
+                        {"const": "random"},
                         {"type": "boolean"},
                         {"const": "default"},
                         {"const": "true"},
@@ -1978,6 +1997,7 @@
                 "vanilla_locations": {
                     "description": "Enables or disables item rewards for completing vanilla objectives.\nVanilla objectives are bonus objectives from the vanilla game,\nalong with some additional objectives to balance the missions.\nEnable these locations for a balanced experience.\n\nEnabled: All locations fitting into this do their normal rewards\nResources: Forces these locations to contain Starting Resources\nDisabled: Removes item rewards from these locations.\n\nNote: Individual locations subject to plando are always enabled, so the plando can be placed properly.\nSee also: Excluded Locations, Item Plando (https://archipelago.gg/tutorial/Archipelago/plando/en#item-plando)",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "enabled"},
                         {"const": "resources"},
                         {"const": "disabled"},
@@ -1994,6 +2014,7 @@
                 "extra_locations": {
                     "description": "Enables or disables item rewards for mission progress and minor objectives.\nThis includes mandatory mission objectives,\ncollecting reinforcements and resource pickups,\ndestroying structures, and overcoming minor challenges.\nEnables these locations to add more checks and items to your world.\n\nEnabled: All locations fitting into this do their normal rewards\nResources: Forces these locations to contain Starting Resources\nDisabled: Removes item rewards from these locations.\n\nNote: Individual locations subject to plando are always enabled, so the plando can be placed properly.\nSee also: Excluded Locations, Item Plando (https://archipelago.gg/tutorial/Archipelago/plando/en#item-plando)",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "enabled"},
                         {"const": "resources"},
                         {"const": "disabled"},
@@ -2010,6 +2031,7 @@
                 "challenge_locations": {
                     "description": "Enables or disables item rewards for completing challenge tasks.\nChallenges are tasks that are more difficult than completing the mission, and are often based on achievements.\nYou might be required to visit the same mission later after getting stronger in order to finish these tasks.\nEnable these locations to increase the difficulty of completing the multiworld.\n\nEnabled: All locations fitting into this do their normal rewards\nResources: Forces these locations to contain Starting Resources\nDisabled: Removes item rewards from these locations.\n\nNote: Individual locations subject to plando are always enabled, so the plando can be placed properly.\nSee also: Excluded Locations, Item Plando (https://archipelago.gg/tutorial/Archipelago/plando/en#item-plando)",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "enabled"},
                         {"const": "resources"},
                         {"const": "disabled"},
@@ -2026,6 +2048,7 @@
                 "mastery_locations": {
                     "description": "Enables or disables item rewards for overcoming especially difficult challenges.\nThese challenges are often based on Mastery achievements and Feats of Strength.\nEnable these locations to add the most difficult checks to the world.\n\nEnabled: All locations fitting into this do their normal rewards\nResources: Forces these locations to contain Starting Resources\nDisabled: Removes item rewards from these locations.\n\nNote: Individual locations subject to plando are always enabled, so the plando can be placed properly.\nSee also: Excluded Locations, Item Plando (https://archipelago.gg/tutorial/Archipelago/plando/en#item-plando)",
                     "oneOf": [
+                        {"const": "random"},
                         {"const": "enabled"},
                         {"const": "resources"},
                         {"const": "disabled"},
