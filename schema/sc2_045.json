@@ -1340,6 +1340,7 @@
                         {"const": "brutal"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "casual": {"type": "integer", "minimum": 0},
                                 "normal": {"type": "integer", "minimum": 0},
@@ -1361,6 +1362,7 @@
                         {"const": "faster"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "default": {"type": "integer", "minimum": 0},
                                 "slower": {"type": "integer", "minimum": 0},
@@ -1388,6 +1390,7 @@
                         {"const": "air"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "ground": {"type": "integer", "minimum": 0},
                                 "air": {"type": "integer", "minimum": 0}
@@ -1411,6 +1414,7 @@
                         {"const": "grid"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "vanilla": {"type": "integer", "minimum": 0},
                                 "vanilla_shuffled": {"type": "integer", "minimum": 0},
@@ -1462,6 +1466,7 @@
                         {"const": "default"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "white": {"type": "integer", "minimum": 0},
                                 "red": {"type": "integer", "minimum": 0},
@@ -1509,6 +1514,7 @@
                         {"const": "default"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "white": {"type": "integer", "minimum": 0},
                                 "red": {"type": "integer", "minimum": 0},
@@ -1556,6 +1562,7 @@
                         {"const": "default"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "white": {"type": "integer", "minimum": 0},
                                 "red": {"type": "integer", "minimum": 0},
@@ -1603,6 +1610,7 @@
                         {"const": "default"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "white": {"type": "integer", "minimum": 0},
                                 "red": {"type": "integer", "minimum": 0},
@@ -1672,6 +1680,7 @@
                         {"const": "false"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "off": {"type": "integer", "minimum": 0},
                                 "balanced": {"type": "integer", "minimum": 0},
@@ -1690,6 +1699,7 @@
                         {"const": "no_logic"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "standard": {"type": "integer", "minimum": 0},
                                 "advanced": {"type": "integer", "minimum": 0},
@@ -1740,6 +1750,7 @@
                         {"const": "always_auto"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "vanilla": {"type": "integer", "minimum": 0},
                                 "auto_in_no_build": {"type": "integer", "minimum": 0},
@@ -1759,6 +1770,7 @@
                         {"const": "bundle_all"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "individual_items": {"type": "integer", "minimum": 0},
                                 "bundle_weapon_and_armor": {"type": "integer", "minimum": 0},
@@ -1777,6 +1789,7 @@
                         {"const": "not_present_and_no_passives"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "vanilla": {"type": "integer", "minimum": 0},
                                 "not_present": {"type": "integer", "minimum": 0},
@@ -1825,6 +1838,7 @@
                         {"const": "size_1"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "vanilla": {"type": "integer", "minimum": 0},
                                 "smooth": {"type": "integer", "minimum": 0},
@@ -1868,6 +1882,7 @@
                         {"const": "item"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "vanilla": {"type": "integer", "minimum": 0},
                                 "always_zerg": {"type": "integer", "minimum": 0},
@@ -1889,6 +1904,7 @@
                         {"const": "everywhere"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "not_present": {"type": "integer", "minimum": 0},
                                 "lotv_protoss": {"type": "integer", "minimum": 0},
@@ -1912,6 +1928,7 @@
                         {"const": "everywhere"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "not_present": {"type": "integer", "minimum": 0},
                                 "lotv_protoss": {"type": "integer", "minimum": 0},
@@ -1938,6 +1955,7 @@
                         {"const": "minimum"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "disabled": {"type": "integer", "minimum": 0},
                                 "additive": {"type": "integer", "minimum": 0},
@@ -1974,6 +1992,7 @@
                         {"const": "false"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "default": {"type": "integer", "minimum": 0},
                                 "true": {"type": "integer", "minimum": 0},
@@ -2003,6 +2022,7 @@
                         {"const": "disabled"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "enabled": {"type": "integer", "minimum": 0},
                                 "resources": {"type": "integer", "minimum": 0},
@@ -2020,6 +2040,7 @@
                         {"const": "disabled"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "enabled": {"type": "integer", "minimum": 0},
                                 "resources": {"type": "integer", "minimum": 0},
@@ -2037,6 +2058,7 @@
                         {"const": "disabled"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "enabled": {"type": "integer", "minimum": 0},
                                 "resources": {"type": "integer", "minimum": 0},
@@ -2054,6 +2076,7 @@
                         {"const": "disabled"},
                         {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "enabled": {"type": "integer", "minimum": 0},
                                 "resources": {"type": "integer", "minimum": 0},
