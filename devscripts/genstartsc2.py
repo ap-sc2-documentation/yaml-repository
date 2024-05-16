@@ -2,7 +2,9 @@
 Script for generating an sc2-only world, starting a local server, and opening a client to connect to it.
 Place this script in the Archipelago root, and configure your Players/ folder as normal.
 
-This script assumes only one yaml is present and that it holds a single sc2 world
+This script assumes only one yaml is present and that it holds a single sc2 world.
+
+Note that it starts the server in a separate command-prompt window, and does not close it to allow for reconnection.
 """
 
 from typing import *
