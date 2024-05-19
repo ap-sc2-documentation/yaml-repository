@@ -4,7 +4,8 @@ Place this script in the Archipelago root, and configure your Players/ folder as
 
 This script assumes only one yaml is present and that it holds a single sc2 world.
 
-Note that it starts the server in a separate command-prompt window, and does not close it to allow for reconnection.
+Note that by default it starts the server in a separate command-prompt window,
+and does not close it to allow for reconnection. Use the `-r` flag to reconnect to a running server.
 """
 
 from typing import *
@@ -145,21 +146,29 @@ def main() -> None:
     if isinstance(name, Error):
         name.printmsg()
         sys.exit(1)
+    
+    reconnect = False
+    for arg in sys.argv[1:]:
+        if arg in ('r', '-r', '-reconnect'):
+            reconnect = True
 
     clean()
     with Defer(restore):
-        world_file = generate()
-        if isinstance(world_file, Error):
-            world_file.printmsg()
-            sys.exit(1)
-        server_okay = start_server(world_file)
-        if isinstance(server_okay, Error):
-            server_okay.printmsg()
-            sys.exit(1)
-        wait_okay = wait_for_server_to_listen()
-        if isinstance(wait_okay, Error):
-            wait_okay.printmsg()
-            sys.exit(1)
+        if reconnect:
+            pass
+        else:
+            world_file = generate()
+            if isinstance(world_file, Error):
+                world_file.printmsg()
+                sys.exit(1)
+            server_okay = start_server(world_file)
+            if isinstance(server_okay, Error):
+                server_okay.printmsg()
+                sys.exit(1)
+            wait_okay = wait_for_server_to_listen()
+            if isinstance(wait_okay, Error):
+                wait_okay.printmsg()
+                sys.exit(1)
         client = start_client(name)
         if isinstance(client, Error):
             client.printmsg()
