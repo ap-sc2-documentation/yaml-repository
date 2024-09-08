@@ -51,221 +51,208 @@
       options:
         Starcraft 2:
           +locked_items:
-            - Marine
-            - War Pigs
+            Marine: 1
+            War Pigs: 1
     - option_name: marine_and_merc
       option_category: Starcraft 2
       option_result: no_pigs
       options:
         Starcraft 2:
           +excluded_items:
-            - Marine
-            - War Pigs
+            War Pigs: 1
     - option_name: firebat_and_merc
       option_category: Starcraft 2
       option_result: dogs
       options:
         Starcraft 2:
           +locked_items:
-            - Firebat
-            - Devil Dogs
+            Firebat: 1
+            Devil Dogs: 1
     - option_name: firebat_and_merc
       option_category: Starcraft 2
       option_result: no_dogs
       options:
         Starcraft 2:
           +excluded_items:
-            - Firebat
-            - Devil Dogs
+            Devil Dogs: 1
     - option_name: marauder_and_merc
       option_category: Starcraft 2
       option_result: securities
       options:
         Starcraft 2:
           +locked_items:
-            - Marauder
-            - Hammer Securities
+            Marauder: 1
+            Hammer Securities: 1
     - option_name: marauder_and_merc
       option_category: Starcraft 2
       option_result: no_securities
       options:
         Starcraft 2:
           +excluded_items:
-            - Marauder
-            - Hammer Securities
+            Hammer Securities: 1
     - option_name: goliath_and_merc
       option_category: Starcraft 2
       option_result: companies
       options:
         Starcraft 2:
           +locked_items:
-            - Goliath
-            - Spartan Company
+            Goliath: 1
+            Spartan Company: 1
     - option_name: goliath_and_merc
       option_category: Starcraft 2
       option_result: no_companies
       options:
         Starcraft 2:
           +excluded_items:
-            - Goliath
-            - Spartan Company
+            Spartan Company: 1
     - option_name: siege_tank_and_merc
       option_category: Starcraft 2
       option_result: breakers
       options:
         Starcraft 2:
           +locked_items:
-            - Siege Tank
-            - Siege Breakers
+            Siege Tank: 1
+            Siege Breakers: 1
     - option_name: siege_tank_and_merc
       option_category: Starcraft 2
       option_result: no_breakers
       options:
         Starcraft 2:
           +excluded_items:
-            - Siege Tank
-            - Siege Breakers
+            Siege Breakers: 1
     - option_name: viking_and_merc
       option_category: Starcraft 2
       option_result: hels_angels
       options:
         Starcraft 2:
           +locked_items:
-            - Viking
-            - Hel's Angels
+            Viking: 1
+            Hel's Angels: 1
     - option_name: viking_and_merc
       option_category: Starcraft 2
       option_result: no_hels_angels
       options:
         Starcraft 2:
           +excluded_items:
-            - Viking
-            - Hel's Angels
+            Hel's Angels: 1
     - option_name: banshee_and_merc
       option_category: Starcraft 2
       option_result: wings
       options:
         Starcraft 2:
           +locked_items:
-            - Banshee
-            - Dusk Wings
+            Banshee: 1
+            Dusk Wings: 1
     - option_name: banshee_and_merc
       option_category: Starcraft 2
       option_result: no_wings
       options:
         Starcraft 2:
           +excluded_items:
-            - Banshee
-            - Dusk Wings
+            Dusk Wings: 1
     - option_name: battlecruiser_and_merc
       option_category: Starcraft 2
       option_result: revenge
       options:
         Starcraft 2:
           +locked_items:
-            - Battlecruiser
-            - Jackson's Revenge
+            Battlecruiser: 1
+            Jackson's Revenge: 1
     - option_name: battlecruiser_and_merc
       option_category: Starcraft 2
       option_result: no_revenge
       options:
         Starcraft 2:
           +excluded_items:
-            - Battlecruiser
-            - Jackson's Revenge
+            Jackson's Revenge: 1
     - option_name: medic_and_merc
       option_category: Starcraft 2
       option_result: skibi_angels
       options:
         Starcraft 2:
           +locked_items:
-            - Medic
-            - Skibi's Angels
+            Medic: 1
+            Skibi's Angels: 1
     - option_name: medic_and_merc
       option_category: Starcraft 2
       option_result: no_skibi_angels
       options:
         Starcraft 2:
           +excluded_items:
-            - Medic
-            - Skibi's Angels
+            Skibi's Angels: 1
     - option_name: reaper_and_merc
       option_category: Starcraft 2
       option_result: heads
       options:
         Starcraft 2:
           +locked_items:
-            - Reaper
-            - Death Heads
+            Reaper: 1
+            Death Heads: 1
     - option_name: reaper_and_merc
       option_category: Starcraft 2
       option_result: no_heads
       options:
         Starcraft 2:
           +excluded_items:
-            - Reaper
-            - Death Heads
+            Death Heads: 1
     - option_name: wraith_and_merc
       option_category: Starcraft 2
       option_result: nightmares
       options:
         Starcraft 2:
           +locked_items:
-            - Wraith
-            - Winged Nightmares
+            Wraith: 1
+            Winged Nightmares: 1
     - option_name: wraith_and_merc
       option_category: Starcraft 2
       option_result: no_nightmares
       options:
         Starcraft 2:
           +excluded_items:
-            - Wraith
-            - Winged Nightmares
+            Winged Nightmares: 1
     - option_name: liberator_and_merc
       option_category: Starcraft 2
       option_result: riders
       options:
         Starcraft 2:
           +locked_items:
-            - Liberator
-            - Midnight Riders
+            Liberator: 1
+            Midnight Riders: 1
     - option_name: liberator_and_merc
       option_category: Starcraft 2
       option_result: no_riders
       options:
         Starcraft 2:
           +excluded_items:
-            - Liberator
-            - Midnight Riders
+            Midnight Riders: 1
     - option_name: valkyrie_and_merc
       option_category: Starcraft 2
       option_result: brynhilds
       options:
         Starcraft 2:
           +locked_items:
-            - Valkyrie
-            - Brynhilds
+            Valkyrie: 1
+            Brynhilds: 1
     - option_name: valkyrie_and_merc
       option_category: Starcraft 2
       option_result: no_brynhilds
       options:
         Starcraft 2:
           +excluded_items:
-            - Valkyrie
-            - Brynhilds
+            Brynhilds: 1
     - option_name: thor_and_merc
       option_category: Starcraft 2
       option_result: jotun
       options:
         Starcraft 2:
           +locked_items:
-            - Thor
-            - Jotun
+            Thor: 1
+            Jotun: 1
     - option_name: thor_and_merc
       option_category: Starcraft 2
       option_result: no_jotun
       options:
         Starcraft 2:
           +excluded_items:
-            - Thor
+            Jotun: 1
             - Jotun
