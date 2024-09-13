@@ -1,0 +1,69 @@
+﻿# Original author: Alice Voltaire (@AliceVoltaire)
+# Implementer: Salzkorn
+
+# This creates a mission order that looks like this:
+#
+#    [-][S][-]
+#    [X]   [X]
+# [-][-][-][-][-]
+# [X]   [X]   [X]
+# [-][-][-][-][-]
+#    [X]   [X]
+#    [-][G][-]
+#
+# S = Start, G = Goal, X = Locked
+
+  custom_mission_order:
+    Branching Paths:
+      type: grid
+      size: 35 # 5 * 7
+      width: 5
+      missions:
+      # Basic setup (holes, start, goal)
+      - index:
+        # Edges
+        - rect(0, 0, 1, 2)
+        - rect(4, 0, 1, 2)
+        - rect(0, 5, 1, 2)
+        - rect(4, 5, 1, 2)
+        # Inner holes
+        - point(2, 1)
+        - point(1, 3)
+        - point(3, 3)
+        - point(2, 5)
+        empty: true
+      - index: point(2, 0)
+        entrance: true
+      - index: point(2, 6)
+        exit: true
+      # Add keys
+      - index:
+        - point(1, 1)
+        - point(3, 1)
+        - point(0, 3)
+        - point(2, 3)
+        - point(4, 3)
+        - point(1, 5)
+        - point(3, 5)
+        entry_rules:
+        - items: { Key: 1 }
+      # Variant with rows sharing a key
+      # Remove or comment out the above key section if you want to use this
+      # This uses special key items that are exclusive to custom mission orders
+      # You can find a complete list of them in the Custom Mission Order docs
+      # - index:
+      #   - point(1, 1)
+      #   - point(3, 1)
+      #   entry_rules:
+      #   - items: { Raynor Key: 1 }
+      # - index:
+      #   - point(0, 3)
+      #   - point(2, 3)
+      #   - point(4, 3)
+      #   entry_rules:
+      #   - items: { Kerrigan Key: 1 }
+      # - index:
+      #   - point(1, 5)
+      #   - point(3, 5)
+      #   entry_rules:
+      #   - items: { Artanis Key: 1 }

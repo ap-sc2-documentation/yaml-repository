@@ -1,0 +1,58 @@
+﻿# Original author: Salzkorn
+
+# This is an example using various features of custom mission orders to create a short campaign.
+# As with all custom mission orders, this requires setting "mission_order: custom" in your YAML to work.
+
+# Custom mission orders have the following basic format:
+#
+# custom_mission_order:
+#   <campaign name>:
+#     some_campaign_option: value
+#     <layout name>:
+#       # Layouts always require a type and size
+#       type: grid
+#       size: 4
+#       some_layout_option: value
+#
+# Campaigns can contain multiple layouts, and the mission order can contain multiple campaigns.
+
+# For more details on available options, please see the Custom Mission Order documentation.
+
+  custom_mission_order:
+    Archipelago!:
+      max_difficulty: hard # This limits the campaign to end with hard missions
+      Victory Island:
+        type: grid
+        size: 4
+        exit: true # This makes this layout the campaign's goal (the default is the last layout)
+        missions: # This modifies mission slots directly
+          - index: [1, 2] # On a size 4 grid these are the top right and bottom left slots
+            entry_rules:
+              # This entry rule requires beating 4 mission from the Archipelago! campaign
+              - scope: Archipelago!
+                amount: 4
+          - index: 3
+            entry_rules:
+              - scope: Archipelago!
+                amount: 7
+      Zerg Atoll:
+        type: column
+        size: 2
+        entry_rules:
+          # This entry rule requires beating the exact mission at index 0 in the Victory Island layout in this campaign
+          # Index 0 is usually the default entrance (or starter mission) of a layout
+          - scope: ../Victory Island/0
+        # This sets the possible mission for this layout to be only missions from the "Zerg Missions" mission group
+        mission_pool: zerg missions
+      Terran Cove:
+        type: column
+        size: 2
+        entry_rules:
+          - scope: ../Victory Island/0
+        mission_pool: terran missions
+      Protoss Peninsula:
+        type: column
+        size: 2
+        entry_rules:
+          - scope: ../Victory Island/0
+        mission_pool: protoss missions
