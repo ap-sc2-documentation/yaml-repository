@@ -1,0 +1,40 @@
+﻿# Original author: Salzkorn
+
+# This is an example demonstrating how to use custom mission orders to create simple race-swapped campaigns.
+# As with all custom mission orders, this requires setting "mission_order: custom" in your YAML to work.
+
+# With all of the below, be wary of Zerg possibly not having enough missions to fill the longer campaigns.
+
+  custom_mission_order:
+    # This is a descriptive name for our custom campaign
+    Zerg WoL:
+      # This loads a campaign preset (see Custom Mission Order docs for a complete list, otherwise just use WoL/HotS/LotV/NCO and Mini variants)
+      preset: mini wol
+      # This sets default options for all the layouts in this campaign
+      global:
+        # This sets the allowed pool of missions for all layouts to be the "Zerg Missions" mission group
+        mission_pool: zerg missions
+
+    # Since multiple campaigns can be in the same mission order, if you want to use this example, make sure to remove the campaigns you don't want
+    T+Z LotV:
+      preset: lotv
+      global:
+        # You can use a list of mission groups to add them together
+        mission_pool:
+        - zerg missions
+        - terran missions
+
+    Protoss HotS with Keys:
+      preset: mini hots
+      # Campaign presets accept this keys option, similar to the key_mode option for regular mission orders
+      # "keys: missions" adds a key to every mission
+      # "keys: layouts" adds a key to every layout
+      keys: missions
+      global:
+        # You can use ~ to remove a mission group from the pool
+        # The following makes a pool of Protoss missions, then removes all no-build and race-swap missions
+        # See the docs for a complete list of instructions for mission pools
+        mission_pool:
+          - protoss missions
+          - ~ no-build missions
+          - ~ raceswap missions

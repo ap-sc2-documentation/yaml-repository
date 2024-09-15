@@ -1,0 +1,44 @@
+﻿# Original author: Sraw
+# Implementer: Salzkorn
+
+# This creates a mission order that looks like this:
+#
+#       [-][X][-][X]
+#    [-][X][-]   [-]
+# [-][S]         [G]
+#    [-][X][-]   [-]
+#       [-][X][-][X]
+#
+# S = Start, G = Goal, X = Locked
+
+  custom_mission_order:
+    Forked Path:
+      type: grid
+      size: 30 # 6 * 5
+      width: 6
+      missions:
+      # Basic setup (holes, start, goal)
+      - index:
+        # Outside
+        - rect(0, 0, 2, 1)
+        - point(0, 1)
+        - rect(0, 4, 2, 1)
+        - point(0, 3)
+        # Inside
+        - rect(2, 2, 2, 1)
+        - rect(4, 1, 1, 3)
+        empty: true
+      - index: point(1, 2)
+        entrance: true
+      - index: point(5, 2)
+        exit: true
+      # Add keys
+      - index:
+        - point(2, 1)
+        - point(2, 3)
+        - point(3, 0)
+        - point(3, 4)
+        - point(5, 0)
+        - point(5, 4)
+        entry_rules:
+        - items: { Key: 1 }
