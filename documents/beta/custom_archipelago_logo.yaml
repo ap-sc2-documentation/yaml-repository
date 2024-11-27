@@ -1,0 +1,145 @@
+# Original author: phaneros
+
+# This is an example showing how to use Custom Mission Orders to make a pixel-art Archipelago logo.
+# As with all custom mission orders, this requires setting "mission_order: custom" in your YAML to work.
+# Colours come from mapping different cells to different races; hence, it requires all races to be enabled.
+# To have enough missions of each faction, it's also necessary to have race-swaps enabled.
+
+# Mission unlocks follow a grid pattern, with the ability to jump over gaps in orthogonal directions up to 3 slots away.
+
+# Contains:
+# terran missions: 34
+# protoss missions: 30
+# zerg missions: 34
+
+  custom_mission_order:
+    Archipelago:
+      display_name: ""
+      type: grid
+      size: 182
+      width: 13
+      goal: true
+      entrance: true
+      entry_rules: []
+      missions:
+      # goal/start
+      - index: point(6, 13)
+        entrance: true
+      - index: point(6, 0)
+        exit: true
+      # shape
+      - index:
+        - rect(0, 0, 5, 1)
+        - rect(8, 0, 5, 1)
+        - rect(0, 1, 4, 1)
+        - rect(9, 1, 4, 1)
+        - rect(0, 2, 4, 1)
+        - rect(9, 2, 4, 1)
+        - rect(0, 3, 1, 1)
+        - rect(4, 3, 1, 1)
+        - rect(8, 3, 1, 1)
+        - rect(12, 3, 1, 1)
+        - rect(5, 4, 1, 1)
+        - rect(7, 4, 1, 1)
+        - rect(5, 5, 3, 1)
+        - rect(0, 6, 1, 1)
+        - rect(4, 6, 5, 1)
+        - rect(12, 6, 1, 1)
+        - rect(5, 7, 3, 1)
+        - rect(4, 8, 5, 1)
+        - rect(3, 9, 2, 1)
+        - rect(8, 9, 2, 1)
+        - rect(0, 10, 1, 1)
+        - rect(3, 10, 1, 1)
+        - rect(9, 10, 1, 1)
+        - rect(12, 10, 1, 1)
+        - rect(0, 11, 4, 1)
+        - rect(9, 11, 4, 1)
+        - rect(0, 12, 4, 1)
+        - rect(9, 12, 4, 1)
+        - rect(0, 13, 5, 1)
+        - rect(8, 13, 5, 1)
+        empty: true
+      - index:
+        - rect(5, 0, 3, 1)
+        - rect(4, 1, 5, 1)
+        - rect(4, 2, 5, 1)
+        - rect(5, 3, 3, 1)
+        - rect(6, 4, 1, 1)
+        - rect(1, 6, 3, 1)
+        - rect(0, 7, 5, 1)
+        - rect(0, 8, 4, 1)
+        - rect(0, 9, 3, 1)
+        - rect(1, 10, 2, 1)
+        mission_pool: Terran Missions
+      - index:
+        - rect(1, 3, 3, 1)
+        - rect(0, 4, 5, 1)
+        - rect(0, 5, 5, 1)
+        - rect(9, 6, 3, 1)
+        - rect(8, 7, 5, 1)
+        - rect(9, 8, 4, 1)
+        - rect(10, 9, 3, 1)
+        - rect(10, 10, 2, 1)
+        mission_pool: Protoss Missions
+      - index:
+        - rect(9, 3, 3, 1)
+        - rect(8, 4, 5, 1)
+        - rect(8, 5, 5, 1)
+        - rect(5, 9, 3, 1)
+        - rect(4, 10, 5, 1)
+        - rect(4, 11, 5, 1)
+        - rect(4, 12, 5, 1)
+        - rect(5, 13, 3, 1)
+        mission_pool: Zerg Missions
+      # next
+      - index: point(4, 2)
+        next: [31, 56, 17]
+      - index: point(8, 2)
+        next: [33, 60, 21]
+      - index: point(3, 3)
+        next: [44, 41, 55]
+      - index: point(5, 3)
+        next: [45, 42, 31]
+      - index: point(7, 3)
+        next: [48, 45, 33]
+      - index: point(9, 3)
+        next: [49, 46, 61]
+      - index: point(4, 4)
+        next: [58, 55, 69, 30]
+      - index: point(6, 4)
+        next: [60, 56, 45]
+      - index: point(8, 4)
+        next: [61, 58, 73, 34]
+      - index: point(0, 5)
+        next: [66, 91, 52]
+      - index: point(4, 5)
+        next: [68, 95, 56]
+      - index: point(8, 5)
+        next: [74, 99, 60]
+      - index: point(12, 5)
+        next: [76, 103, 64]
+      - index: point(0, 7)
+        next: [92, 104, 65]
+      - index: point(4, 7)
+        next: [94, 134, 69]
+      - index: point(8, 7)
+        next: [100, 138, 73]
+      - index: point(12, 7)
+        next: [102, 116, 77]
+      - index: point(2, 9)
+        next: [122, 118, 132, 106]
+      - index: point(5, 9)
+        next: [123, 119, 135]
+      - index: point(7, 9)
+        next: [127, 123, 137]
+      - index: point(10, 9)
+        next: [128, 124, 140, 114]
+      - index: point(2, 10)
+        next: [134, 131, 119]
+      - index: point(4, 10)
+        next: [135, 132, 147, 95]
+      - index: point(8, 10)
+        next: [140, 137, 151, 99]
+      - index: point(10, 10)
+        next: [141, 138, 127]
