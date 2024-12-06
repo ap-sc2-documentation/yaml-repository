@@ -5,8 +5,6 @@
 # To play with less than all of the races, remove that race's respective campaign from the custom mission order.
 # To have enough missions of each faction, it's also necessary to have race-swaps enabled.
 
-# Mission unlocks follow a grid pattern, with the ability to jump over gaps in orthogonal directions up to 3 slots away.
-
 # Contains:
 # terran missions: 29
 # protoss missions: 30
