@@ -1,0 +1,66 @@
+# Original author: Magnemania
+
+# This creates one campaign for each race that takes the shape of the respective race's logo
+# As with all custom mission orders, this requires setting "mission_order: custom" in your YAML to work.
+# To play with less than all of the races, remove that race's respective campaign from the custom mission order.
+# To have enough missions of each faction, it's also necessary to have race-swaps enabled.
+
+# Contains:
+# terran missions: 29
+# zerg missions: 31
+# protoss missions: 24
+
+  custom_mission_order:
+    Terran:
+      type: canvas
+      goal: true
+      canvas:
+      - '   s   '
+      - 'ttt ttt'
+      - ' ttttt '
+      - ' ttttt '
+      - 't ttt t'
+      - 'tttettt'
+      mission_pool: Terran Missions
+      missions:
+      - index: group(s)
+        entrance: true
+      - index: group(e)
+        exit: true
+    Zerg:
+      type: canvas
+      goal: true
+      canvas:
+        - '  z z z '
+        - '  zzzzzz'
+        - 'zz    zz'
+        - ' s ze z '
+        - 'zz z  zz'
+        - ' z  zzz '
+        - 'zzz     '
+        - '  zz    '
+      mission_pool: Zerg Missions
+      missions:
+      - index: group(s)
+        entrance: true
+      - index: group(e)
+        exit: true
+    Protoss:
+      type: canvas
+      goal: true
+      canvas:
+        - '  s    '
+        - '  pp   '
+        - '  ppp p'
+        - '    ppp'
+        - '  p ppp'
+        - '    pp '
+        - '  pppp '
+        - ' pp p  '
+        - '  e    '
+      mission_pool: Protoss Missions
+      missions:
+      - index: group(s)
+        entrance: true
+      - index: group(e)
+        exit: true
