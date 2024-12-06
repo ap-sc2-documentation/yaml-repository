@@ -7,8 +7,8 @@
 
 # Contains:
 # terran missions: 29
-# protoss missions: 30
-# zerg missions: 24
+# zerg missions: 31
+# protoss missions: 24
 
   custom_mission_order:
     Terran:
