@@ -19,6 +19,7 @@ import time
 PLAYERS_FOLDER = './Players'
 OUTPUT_FOLDER = './output'
 
+# Note: change this to an absolute path to use a particular version of windows
 PYTHON = 'python'
 GENERATE = 'Generate.py'
 SERVER = 'MultiServer.py'
@@ -108,7 +109,7 @@ def start_server(zip_location: str) -> None|Error:
     print("Starting server")
     if is_server_running():
         return Error("An existing server is already running; close it first")
-    cmd = ['start', 'cmd', '/k', SERVER, zip_location]
+    cmd = ['start', 'cmd', '/k', PYTHON, SERVER, zip_location]
     subprocess.call(cmd, shell=True)
 
 
