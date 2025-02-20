@@ -5,7 +5,9 @@ Place this script in the Archipelago root, and configure your Players/ folder as
 This script assumes only one yaml is present and that it holds a single sc2 world.
 
 Note that by default it starts the server in a separate command-prompt window,
-and does not close it to allow for reconnection. Use the `-r` flag to reconnect to a running server.
+and does not close it to allow for reconnection.
+Use the `-r` flag to reconnect to a running server.
+Use the `-s` flag to skip generation and open the newest zip file in the output folder instead.
 """
 
 from typing import *
@@ -133,6 +135,13 @@ def start_client(name: str) -> None|Error:
         return Error(f"Client exited with exit code {result}")
 
 
+def get_newest_zip() -> str|Error:
+    player_zips = list(glob.glob(f'{OUTPUT_FOLDER}/*.zip'))
+    if len(player_zips) == 0:
+        return Error("Could not run latest as no games have been generated")
+    return max(player_zips, key=lambda x: os.path.getmtime(x)) 
+
+
 class Defer:
     def __init__(self, func: Callable, args: tuple = ()) -> None:
         self.func = func
@@ -151,20 +160,27 @@ def main() -> None:
         name.printmsg()
         sys.exit(1)
     
+    skip_generate = False
     reconnect = False
     for arg in sys.argv[1:]:
         if arg in ('r', '-r', '-reconnect'):
             reconnect = True
+        if arg in ('s', '-s', '-skip', '-skip_generate'):
+            skip_generate = True
 
     clean()
     with Defer(restore):
         if reconnect:
             pass
         else:
-            world_file = generate()
+            if skip_generate:
+                world_file = get_newest_zip()
+            else:
+                world_file = generate()
             if isinstance(world_file, Error):
                 world_file.printmsg()
                 sys.exit(1)
+            print(f'Starting server with world file {world_file}')
             server_okay = start_server(world_file)
             if isinstance(server_okay, Error):
                 server_okay.printmsg()
