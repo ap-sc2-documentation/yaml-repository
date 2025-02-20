@@ -50,16 +50,19 @@ def clean(verbose = False) -> None:
             continue
         if verbose:
             print(f'Removing {world}')
-        shutil.move(world, world.replace('worlds', '_worlds'))
+        os.rename(world, world.replace('worlds', '_worlds'))
 
 
 def restore(verbose = False) -> None:
     worlds = glob.glob('_worlds/*')
     print("Restoring all worlds")
     for world in worlds:
+        if os.path.basename(world) == '__pycache__':
+            shutil.rmtree(world)
+            continue
         if verbose:
             print(f'Restoring {world}')
-        shutil.move(world, world.replace('_worlds', 'worlds'))
+        os.rename(world, world.replace('_worlds', 'worlds'))
 
 
 def get_player_name() -> str|Error:
