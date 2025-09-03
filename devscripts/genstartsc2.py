@@ -25,7 +25,7 @@ OUTPUT_FOLDER = './output'
 PYTHON = 'python'
 GENERATE = 'Generate.py'
 SERVER = 'MultiServer.py'
-CLIENT = 'Starcraft2Client.py'
+CLIENT = ['Launcher.py', 'Starcraft 2 Client', '--']
 PORT = 38281
 
 
@@ -46,7 +46,7 @@ def clean(verbose = False) -> None:
     worlds = glob.glob('worlds/*')
     print("Removing all unnecessary worlds for faster run times")
     for world in worlds:
-        if os.path.basename(world) in ('_bizhawk', '_sc2common', 'sc2', 'alttp', 'generic'):
+        if os.path.basename(world) in ('_bizhawk', '_sc2common', 'sc2', 'wc3', 'alttp', 'generic'):
             continue
         if os.path.splitext(world)[1] == '.py':
             continue
@@ -130,7 +130,7 @@ def wait_for_server_to_listen(poll_period_seconds: float = 0.1, timeout_seconds:
 
 def start_client(name: str) -> None|Error:
     print("Starting client")
-    result = subprocess.call([PYTHON, CLIENT, '--connect', 'localhost', '--name', name])
+    result = subprocess.call([PYTHON, *CLIENT, '--connect', 'localhost', '--name', name])
     if result != 0:
         return Error(f"Client exited with exit code {result}")
 
