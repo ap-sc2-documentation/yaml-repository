@@ -22,10 +22,13 @@ PLAYERS_FOLDER = './Players'
 OUTPUT_FOLDER = './output'
 
 # Note: change this to an absolute path to use a particular version of windows
-PYTHON = 'python'
+PYTHON = 'python3'
 GENERATE = 'Generate.py'
 SERVER = 'MultiServer.py'
-CLIENT = ['Launcher.py', 'Starcraft 2 Client', '--']
+if sys.platform == 'windows':
+    CLIENT_START = [PYTHON, 'Launcher.py', 'Starcraft 2 Client', '--']
+else:
+    CLIENT_START = ['./sc2client.sh']
 PORT = 38281
 
 
@@ -103,19 +106,36 @@ def generate() -> str|Error:
 
 
 def is_server_running() -> bool:
-    result = subprocess.call(
-        ['powershell', '-Command', f'Get-NetTCPConnection -LocalPort {PORT} -RemotePort 0'],
-        stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL
+    if sys.platform == 'win32':
+        result = subprocess.call(
+            ['powershell', '-Command', f'Get-NetTCPConnection -LocalPort {PORT} -RemotePort 0'],
+            stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL
+        )
+        return result == 0
+    assert sys.platform == 'linux'
+    stdout = subprocess.run(
+        ['netstat', '-an'],
+        stderr=subprocess.DEVNULL, stdout=subprocess.PIPE,
+        universal_newlines=True,
     )
-    return result == 0
+    for line in stdout.stdout.split('\n'):
+        if f':{PORT}' in line:
+            print(line)
+            return True
+    return False
 
 
 def start_server(zip_location: str) -> None|Error:
     print("Starting server")
     if is_server_running():
         return Error("An existing server is already running; close it first")
-    cmd = ['start', 'cmd', '/k', PYTHON, SERVER, zip_location]
-    subprocess.call(cmd, shell=True)
+    if sys.platform == 'windows':
+        cmd = ['start', 'cmd', '/k', PYTHON, SERVER, zip_location]
+        shell = True
+    else:
+        cmd = ['gnome-terminal', '--', 'bash', '-c', f"source ./venv/bin/activate; {PYTHON} {SERVER} {zip_location}"]
+        shell = False
+    subprocess.call(cmd, shell=shell, cwd=os.getcwd())
 
 
 def wait_for_server_to_listen(poll_period_seconds: float = 0.1, timeout_seconds: float = 10.0) -> None|Error:
@@ -130,7 +150,7 @@ def wait_for_server_to_listen(poll_period_seconds: float = 0.1, timeout_seconds:
 
 def start_client(name: str) -> None|Error:
     print("Starting client")
-    result = subprocess.call([PYTHON, *CLIENT, '--connect', 'localhost', '--name', name])
+    result = subprocess.call([*CLIENT_START, '--connect', 'localhost', '--name', name])
     if result != 0:
         return Error(f"Client exited with exit code {result}")
 
@@ -168,7 +188,7 @@ def main() -> None:
         if arg in ('s', '-s', '-skip', '-skip_generate'):
             skip_generate = True
 
-    clean()
+    # clean()
     with Defer(restore):
         if reconnect:
             pass
