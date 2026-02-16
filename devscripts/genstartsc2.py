@@ -22,12 +22,13 @@ PLAYERS_FOLDER = './Players'
 OUTPUT_FOLDER = './output'
 
 # Note: change this to an absolute path to use a particular version of windows
-PYTHON = 'python3'
 GENERATE = 'Generate.py'
 SERVER = 'MultiServer.py'
 if sys.platform == 'windows':
+    PYTHON = 'python'
     CLIENT_START = [PYTHON, 'Launcher.py', 'Starcraft 2 Client', '--']
 else:
+    PYTHON = 'python3'
     CLIENT_START = ['./sc2client.sh']
 PORT = 38281
 
@@ -217,3 +218,4 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
+
